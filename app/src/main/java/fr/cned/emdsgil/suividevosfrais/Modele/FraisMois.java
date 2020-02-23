@@ -1,6 +1,4 @@
-package fr.cned.emdsgil.suividevosfrais;
-
-import android.util.Log;
+package fr.cned.emdsgil.suividevosfrais.Modele;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -8,7 +6,7 @@ import java.util.ArrayList;
 /**
  * Classe métier contenant les informations des frais d'un mois
  */
-class FraisMois implements Serializable {
+public class FraisMois implements Serializable {
 
     private Integer mois; // mois concerné
     private Integer annee; // année concernée

@@ -1,4 +1,4 @@
-package fr.cned.emdsgil.suividevosfrais;
+package fr.cned.emdsgil.suividevosfrais.Vue;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,6 +13,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+
+import fr.cned.emdsgil.suividevosfrais.Modele.FraisMois;
+import fr.cned.emdsgil.suividevosfrais.Modele.Global;
+import fr.cned.emdsgil.suividevosfrais.Modele.Serializer;
+import fr.cned.emdsgil.suividevosfrais.R;
 
 import java.util.Locale;
 

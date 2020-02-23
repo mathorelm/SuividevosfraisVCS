@@ -1,4 +1,4 @@
-package fr.cned.emdsgil.suividevosfrais;
+package fr.cned.emdsgil.suividevosfrais.Vue;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,6 +17,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.Locale;
 
 //import android.support.v7.app.AppCompatActivity;
+import fr.cned.emdsgil.suividevosfrais.Modele.FraisMois;
+import fr.cned.emdsgil.suividevosfrais.Modele.Global;
+import fr.cned.emdsgil.suividevosfrais.Modele.Serializer;
+import fr.cned.emdsgil.suividevosfrais.R;
 
 public class EtapeActivity extends AppCompatActivity {
 

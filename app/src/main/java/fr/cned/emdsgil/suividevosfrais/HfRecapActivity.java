@@ -2,9 +2,8 @@ package fr.cned.emdsgil.suividevosfrais;
 
 import android.content.Intent;
 import android.os.Bundle;
-
+//import android.support.v7.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -68,7 +67,7 @@ public class HfRecapActivity extends AppCompatActivity {
             // insertion dans la listview
         }
         ListView listView = (ListView) findViewById(R.id.lstHfRecap);
-        FraisHfAdapter adapter = new FraisHfAdapter(HfRecapActivity.this, liste);
+        FraisHfAdapter adapter = new FraisHfAdapter(HfRecapActivity.this, liste, key);
         listView.setAdapter(adapter);
     }
 
@@ -80,7 +79,7 @@ public class HfRecapActivity extends AppCompatActivity {
             public void onClick(View v) {
                 retourActivityPrincipale();
             }
-        });
+    	}) ;
     }
 
     /**
@@ -93,7 +92,7 @@ public class HfRecapActivity extends AppCompatActivity {
             public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                 afficheListe();
             }
-        });
+    	});
     }
 
 
@@ -103,5 +102,5 @@ public class HfRecapActivity extends AppCompatActivity {
     private void retourActivityPrincipale() {
         Intent intent = new Intent(HfRecapActivity.this, MainActivity.class);
         startActivity(intent);
-    }
+	}
 }

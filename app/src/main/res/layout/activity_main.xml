@@ -2,10 +2,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_alignParentStart="true"
-    android:layout_alignParentTop="true"
     android:layout_alignParentEnd="true"
     android:layout_alignParentBottom="true"
+    android:layout_alignParentStart="true"
+    android:layout_alignParentTop="true"
     android:orientation="vertical"
     android:weightSum="1"
     tools:context=".MainActivity"
@@ -30,8 +30,8 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:background="@null"
-                android:contentDescription="@string/icone_frais_km"
                 android:scaleType="fitCenter"
+                android:contentDescription="@string/icone_frais_km"
                 android:src="@drawable/frais_km" />
 
         </LinearLayout>
@@ -49,8 +49,8 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:background="@null"
-                android:contentDescription="@string/icone_frais_repas"
                 android:scaleType="fitCenter"
+                android:contentDescription="@string/icone_frais_repas"
                 android:src="@drawable/frais_repas" />
 
         </LinearLayout>
@@ -75,8 +75,8 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:background="@null"
-                android:contentDescription="@string/icone_frais_nuitee"
                 android:scaleType="fitCenter"
+                android:contentDescription="@string/icone_frais_nuitee"
                 android:src="@drawable/frais_nuitee" />
 
         </LinearLayout>
@@ -94,8 +94,8 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:background="@null"
-                android:contentDescription="@string/icone_frais_etape"
                 android:scaleType="fitCenter"
+                android:contentDescription="@string/icone_frais_etape"
                 android:src="@drawable/frais_etape" />
 
         </LinearLayout>
@@ -120,8 +120,8 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:background="@null"
-                android:contentDescription="@string/icone_frais_hf"
                 android:scaleType="fitCenter"
+                android:contentDescription="@string/icone_frais_hf"
                 android:src="@drawable/frais_hf" />
 
         </LinearLayout>
@@ -139,8 +139,8 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:background="@null"
-                android:contentDescription="@string/icone_recap_hf"
                 android:scaleType="fitCenter"
+                android:contentDescription="@string/icone_recap_hf"
                 android:src="@drawable/frais_hf_recap" />
 
         </LinearLayout>

@@ -2,9 +2,8 @@ package fr.cned.emdsgil.suividevosfrais;
 
 import android.os.Bundle;
 import android.content.Intent;
-
+//import android.support.v7.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -54,7 +53,7 @@ public class HfActivity extends AppCompatActivity {
             public void onClick(View v) {
                 retourActivityPrincipale();
             }
-        });
+        }) ;
     }
 
     /**
@@ -67,7 +66,7 @@ public class HfActivity extends AppCompatActivity {
                 Serializer.serialize(Global.listFraisMois, HfActivity.this);
                 retourActivityPrincipale();
             }
-        });
+        }) ;
     }
 
     /**

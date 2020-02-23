@@ -1,10 +1,15 @@
 package fr.cned.emdsgil.suividevosfrais;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -14,16 +19,17 @@ class FraisHfAdapter extends BaseAdapter {
 
     private final ArrayList<FraisHf> lesFrais; // liste des frais du mois
     private final LayoutInflater inflater;
+    private final int key;
 
     /**
      * Constructeur de l'adapter pour valoriser les propriétés
-     *
-     * @param context  Accès au contexte de l'application
+     * @param context Accès au contexte de l'application
      * @param lesFrais Liste des frais hors forfait
      */
-    public FraisHfAdapter(Context context, ArrayList<FraisHf> lesFrais) {
+    public FraisHfAdapter(Context context, ArrayList<FraisHf> lesFrais, int laCle) {
         inflater = LayoutInflater.from(context);
         this.lesFrais = lesFrais;
+        this.key = laCle;
     }
 
     /**
@@ -62,6 +68,8 @@ class FraisHfAdapter extends BaseAdapter {
             holder.txtListJour = convertView.findViewById(R.id.txtListJour);
             holder.txtListMontant = convertView.findViewById(R.id.txtListMontant);
             holder.txtListMotif = convertView.findViewById(R.id.txtListMotif);
+            //déclaration du bouton pour pouvoir gérer sur lequel on clique
+            holder.cmdSuppHf = convertView.findViewById(R.id.cmdSuppHf);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
@@ -69,6 +77,25 @@ class FraisHfAdapter extends BaseAdapter {
         holder.txtListJour.setText(String.format(Locale.FRANCE, "%d", lesFrais.get(index).getJour()));
         holder.txtListMontant.setText(String.format(Locale.FRANCE, "%.2f", lesFrais.get(index).getMontant()));
         holder.txtListMotif.setText(lesFrais.get(index).getMotif());
+        //enregistrement de l'indice du bouton pour écouteur
+        holder.cmdSuppHf.setTag(index);
+        //Création de l'écouteur d'événement
+        holder.cmdSuppHf.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+
+                //Contient l'indice du Frais HF cliqué
+                int indice = (int) v.getTag();
+                //Effectuer la suppression
+                if (Global.listFraisMois.containsKey(key)) {
+                    Global.listFraisMois.get(key).supprFraisHf(indice);
+                } else {
+                    //lancer une exception ?
+                }
+                ;
+                //mettre à jour la liste visuelle
+                notifyDataSetChanged();
+            }
+        });
         return convertView;
     }
 
@@ -79,6 +106,8 @@ class FraisHfAdapter extends BaseAdapter {
         TextView txtListJour;
         TextView txtListMontant;
         TextView txtListMotif;
+        //Ajout du bouton supprimer
+        ImageButton cmdSuppHf;
     }
-
+	
 }

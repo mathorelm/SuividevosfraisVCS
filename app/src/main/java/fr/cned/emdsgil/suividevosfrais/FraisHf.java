@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 /**
  * Classe métier contenant la description d'un frais hors forfait
+ *
  */
 class FraisHf implements Serializable {
 

@@ -1,5 +1,7 @@
 package fr.cned.emdsgil.suividevosfrais;
 
+import android.util.Log;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -8,13 +10,13 @@ import java.util.ArrayList;
  */
 class FraisMois implements Serializable {
 
-    private final ArrayList<FraisHf> lesFraisHf; // liste des frais hors forfait du mois
     private Integer mois; // mois concerné
     private Integer annee; // année concernée
     private Integer etape; // nombre d'étapes du mois
     private Integer km; // nombre de km du mois
     private Integer nuitee; // nombre de nuitées du mois
     private Integer repas; // nombre de repas du mois
+    private final ArrayList<FraisHf> lesFraisHf; // liste des frais hors forfait du mois
 
     public FraisMois(Integer annee, Integer mois) {
         this.annee = annee;
@@ -34,10 +36,22 @@ class FraisMois implements Serializable {
      * Ajout d'un frais hors forfait
      *
      * @param montant Montant en euros du frais hors forfait
-     * @param motif   Justification du frais hors forfait
+     * @param motif Justification du frais hors forfait
      */
     public void addFraisHf(Float montant, String motif, Integer jour) {
         lesFraisHf.add(new FraisHf(montant, motif, jour));
+    }
+
+    public float getLeFraisHFMontant(int indice) {
+        return lesFraisHf.get(indice).getMontant();
+    }
+
+    public String getleFraisHFMotif(int indice) {
+        return lesFraisHf.get(indice).getMotif();
+    }
+
+    public int getLeFraisHFJour(int indice) {
+        return lesFraisHf.get(indice).getJour();
     }
 
     /**
@@ -45,7 +59,7 @@ class FraisMois implements Serializable {
      *
      * @param index Indice du frais hors forfait à supprimer
      */
-    public void supprFraisHf(Integer index) {
+    public void supprFraisHf(int index) {
         lesFraisHf.remove(index);
     }
 

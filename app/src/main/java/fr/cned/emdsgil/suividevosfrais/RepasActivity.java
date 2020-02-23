@@ -82,7 +82,7 @@ public class RepasActivity extends AppCompatActivity {
             public void onClick(View v) {
                 retourActivityPrincipale();
             }
-        });
+        }) ;
     }
 
     /**
@@ -94,9 +94,9 @@ public class RepasActivity extends AppCompatActivity {
                 Serializer.serialize(Global.listFraisMois, RepasActivity.this);
                 retourActivityPrincipale();
             }
-        });
+        }) ;
     }
-
+    
     /**
      * Sur le clic du bouton plus : ajout de 10 dans la quantité
      */
@@ -106,9 +106,9 @@ public class RepasActivity extends AppCompatActivity {
                 qte += 1;
                 enregNewQte();
             }
-        });
+        }) ;
     }
-
+    
     /**
      * Sur le clic du bouton moins : enlève 10 dans la quantité si c'est possible
      */
@@ -118,9 +118,9 @@ public class RepasActivity extends AppCompatActivity {
                 qte = Math.max(0, qte - 1); // suppression de 10 si possible
                 enregNewQte();
             }
-        });
+        }) ;
     }
-
+    
     /**
      * Sur le changement de date : mise à jour de l'affichage de la qte
      */

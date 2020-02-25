@@ -82,7 +82,7 @@ public class EtapeActivity extends AppCompatActivity {
      * Sur la selection de l'image : retour au menu principal
      */
     private void imgReturn_clic() {
-        findViewById(R.id.imgEtapeReturn).setOnClickListener(new ImageView.OnClickListener() {
+        findViewById(R.id.imgTransfertReturn).setOnClickListener(new ImageView.OnClickListener() {
             public void onClick(View v) {
                 retourActivityPrincipale();
             }
@@ -93,7 +93,7 @@ public class EtapeActivity extends AppCompatActivity {
      * Sur le clic du bouton valider : sérialisation
      */
     private void cmdValider_clic() {
-        findViewById(R.id.cmdEtapeValider).setOnClickListener(new Button.OnClickListener() {
+        findViewById(R.id.cmdAuthentValider).setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
                 Serializer.serialize(Global.listFraisMois, EtapeActivity.this);
                 retourActivityPrincipale();

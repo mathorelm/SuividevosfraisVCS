@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
         cmdMenu_clic(((ImageButton) findViewById(R.id.cmdHfRecap)), HfRecapActivity.class);
         cmdMenu_clic(((ImageButton) findViewById(R.id.cmdEtape)), EtapeActivity.class);
         cmdMenu_clic(((ImageButton) findViewById(R.id.cmdRepas)), RepasActivity.class);
+        //cmdMenu_clic(((ImageButton) findViewById(R.id.cmdTransfert)), AuthentActivity.class);
         cmdTransfert_clic();
     }
 
@@ -94,6 +95,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // envoi les informations sérialisées vers le serveur
                 // en construction
+                Intent intent = new Intent(MainActivity.this, AuthentActivity.class);
+                startActivity(intent);
             }
         });
     }

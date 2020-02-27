@@ -2,6 +2,7 @@ package fr.cned.emdsgil.suividevosfrais.Vue;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -15,9 +16,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import org.json.JSONArray;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import fr.cned.emdsgil.suividevosfrais.Modele.AccesDistant;
+import fr.cned.emdsgil.suividevosfrais.Modele.FraisHf;
+import fr.cned.emdsgil.suividevosfrais.Modele.Global;
 import fr.cned.emdsgil.suividevosfrais.R;
 
 //import android.support.v7.app.AppCompatActivity;
@@ -75,6 +80,49 @@ public class TransfertActivity extends AppCompatActivity {
         ((TextView) findViewById(R.id.txtEtapes)).setText(String.format(Locale.FRANCE, "%d", etapes));*/
     }
 
+    public static JSONArray prepareFraisForfait() {
+
+        List lesFraisForfait = new ArrayList();
+        //Remplir la liste avec les éléments extraits de la HashTable
+        Set keys = Global.listFraisMois.keySet();
+        Iterator itr = keys.iterator();
+        Object key;
+        while (itr.hasNext()) {
+            key = itr.next();
+            lesFraisForfait.add(key);
+            lesFraisForfait.add(Global.listFraisMois.get(key).getAnnee());
+            lesFraisForfait.add(Global.listFraisMois.get(key).getMois());
+            lesFraisForfait.add(Global.listFraisMois.get(key).getKm());
+            lesFraisForfait.add(Global.listFraisMois.get(key).getRepas());
+            lesFraisForfait.add(Global.listFraisMois.get(key).getEtape());
+            lesFraisForfait.add(Global.listFraisMois.get(key).getNuitee());
+        }
+
+        JSONArray FF = new JSONArray(lesFraisForfait);
+        Log.d("prepareFraisForfait", FF.toString());
+        return FF;
+    }
+
+    public static JSONArray prepareFraisHF() {
+        List lesFraisHorsForfait = new ArrayList();
+        //Remplir la liste avec les éléments extraits de la HashTable
+        Set keys = Global.listFraisMois.keySet();
+        Iterator itr = keys.iterator();
+        Object key;
+        while (itr.hasNext()) {
+            key = itr.next();
+            lesFraisHorsForfait.add(key);
+            ArrayList<FraisHf> listeHF = Global.listFraisMois.get(key).getLesFraisHf();
+            lesFraisHorsForfait.add(listeHF.get(0));
+            lesFraisHorsForfait.add(listeHF.get(1));
+            lesFraisHorsForfait.add(listeHF.get(2));
+
+        }
+        JSONArray FhF = new JSONArray(lesFraisHorsForfait);
+        Log.d("prepareFraisHorsForfait", FhF.toString());
+        return FhF;
+    }
+
     /**
      * Sur la selection de l'image : retour au menu principal
      */
@@ -103,16 +151,6 @@ public class TransfertActivity extends AppCompatActivity {
                 JSONArray login_mdp = new JSONArray(list);
                 AccesDistant monacces = new AccesDistant();
                 monacces.envoi("check", login_mdp);
-                if (isAuthenticated) {
-                    //Adresser les frais forfait
-
-                    //Adresser les frais hors forfait
-                }
-                //Adresser les frais forfait
-
-
-                //Adresser les frais hors forfait
-                //retourActivityPrincipale();
             }
         });
     }

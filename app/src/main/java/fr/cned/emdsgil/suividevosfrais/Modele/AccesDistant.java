@@ -35,57 +35,27 @@ public class AccesDistant implements AsyncResponse {
     @Override
     public void processFinish(String output) {
         // pour vérification, affiche le contenu du retour dans la console
-        Log.d("serveur", output);
+        Log.d("retourserveur", output);
         // découpage du message reçu
         String[] message = output.split("%");
         // contrôle si le retour est correct (au moins 2 cases)
         if (message.length > 1) {
             if (message[0].equals("check")) {
-                Log.d("check", "****************" + message[1]);
-                if (message[1] == "OK") {
-                    TransfertActivity.isAuthenticated = Boolean.TRUE;
+
+                if (message[1].equals("OK")) {
+                    Log.d("reception", "envoi du transfert fraisforfait");
+                    JSONArray letableauJSON = TransfertActivity.prepareFraisForfait();
+                    this.envoi("lesfraisforfait", letableauJSON);
+                    JSONArray le2emeTableauJSON = TransfertActivity.prepareFraisHF();
+                    this.envoi("lesfraisHF", le2emeTableauJSON);
                 }
             } else {
-                if (message[0].equals("fraisforfait")) {
-                    Log.d("fraisforfait", "****************" + message[1]);
-                    try {
-                        // récupération des informations
-                        JSONObject info = new JSONObject(message[1]);
-                        Integer poids = info.getInt("poids");
-                        Integer taille = info.getInt("taille");
-                        Integer age = info.getInt("age");
-                        Integer sexe = info.getInt("sexe");
-                        //Date dateMesure = MesOutils.convertStringToDate(info.getString("datemesure"),"yyyy-MM-dd hh:mm:ss");
-                        // création et mémorisation du profil
-                        //Profil profil = new Profil(dateMesure, poids, taille, age, sexe);
-                        //controle.setProfil(profil);
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
+                if (message[0].equals("lesfraisforfait")) {
+                    Log.d("reception", "fraisforfait ! = " + message[1]);
+
                 } else {
-                    if (message[0].equals("fraishf")) {
-                        Log.d("fraishf", "****************" + message[1]);
-                        try {
-                            // récupération des informations
-                            JSONArray lesInfos = new JSONArray(message[1]);
-                            //ArrayList<Profil> lesProfils = new ArrayList<Profil>();
-                            for (int k = 0; k < lesInfos.length(); k++) {
-                                JSONObject info = new JSONObject(lesInfos.get(k).toString());
-                                Integer poids = info.getInt("poids");
-                                Integer taille = info.getInt("taille");
-                                Integer age = info.getInt("age");
-                                Integer sexe = info.getInt("sexe");
-                                //Date dateMesure = MesOutils.convertStringToDate(info.getString("datemesure"), "yyyy-MM-dd hh:mm:ss");
-                                // création et mémorisation du profil
-                                //Profil profil = new Profil(dateMesure, poids, taille, age, sexe);
-                                // ajout du profil dans la collection
-                                // lesProfils.add(profil);
-                            }
-                            // mémorisation des profils
-                            //controle.setLesProfis(lesProfils);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
+                    if (message[0].equals("lesfraisHF")) {
+                        Log.d("reception", "fraisHF ! = " + message[1]);
                     } else {
                         if (message[0].equals("Erreur !")) {
                             Log.d("Erreur !", "****************" + message[1]);

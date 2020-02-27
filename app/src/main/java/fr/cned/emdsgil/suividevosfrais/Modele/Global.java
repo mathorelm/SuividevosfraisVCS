@@ -5,8 +5,12 @@ import android.util.Log;
 import android.view.View;
 import android.widget.DatePicker;
 
+import org.json.JSONArray;
+
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.Hashtable;
+import java.util.List;
 
 import fr.cned.emdsgil.suividevosfrais.Modele.FraisMois;
 
@@ -41,5 +45,6 @@ public abstract class Global {
             Log.d("ERROR", e.getMessage());
         }
     }
+
 
 }

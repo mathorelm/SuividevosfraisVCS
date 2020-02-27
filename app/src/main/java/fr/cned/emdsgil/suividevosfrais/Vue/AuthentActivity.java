@@ -10,13 +10,19 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.DatePicker.OnDateChangedListener;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import org.json.JSONArray;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
+import fr.cned.emdsgil.suividevosfrais.Modele.AccesDistant;
 import fr.cned.emdsgil.suividevosfrais.Modele.FraisMois;
 import fr.cned.emdsgil.suividevosfrais.Modele.Global;
 import fr.cned.emdsgil.suividevosfrais.Modele.Serializer;
@@ -30,6 +36,7 @@ import fr.cned.emdsgil.suividevosfrais.R;
  */
 public class AuthentActivity extends AppCompatActivity {
 
+    public static Boolean isAuthenticated = Boolean.FALSE;
     // informations affichées dans l'activité
     private Integer annee;
     private Integer mois;
@@ -37,10 +44,11 @@ public class AuthentActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Log.d("Chargement", "Entrée dans AuthentActivity");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_authent);
         setTitle("GSB : Transférer les données locales");
+        //Activation du bouton Valider
+        cmdValider_clic();
     }
 
     @Override
@@ -92,8 +100,27 @@ public class AuthentActivity extends AppCompatActivity {
     private void cmdValider_clic() {
         findViewById(R.id.cmdAuthentValider).setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
-                /*Serializer.serialize(Global.listFraisMois, AuthentActivity.this);*/
-                retourActivityPrincipale();
+                //Effectuer la vérification mot de passe
+                String login = ((EditText) findViewById(R.id.txtTransfertLogin)).getText().toString();
+
+                String mdp = ((EditText) findViewById(R.id.txtTransfertMdp)).getText().toString();
+
+                List list = new ArrayList();
+                list.add(login);
+                list.add(mdp);
+                JSONArray login_mdp = new JSONArray(list);
+                AccesDistant monacces = new AccesDistant();
+                monacces.envoi("check", login_mdp);
+                if (isAuthenticated) {
+                    //Adresser les frais forfait
+
+                    //Adresser les frais hors forfait
+                }
+                //Adresser les frais forfait
+
+
+                //Adresser les frais hors forfait
+                //retourActivityPrincipale();
             }
         });
     }
@@ -104,5 +131,6 @@ public class AuthentActivity extends AppCompatActivity {
     private void retourActivityPrincipale() {
         Intent intent = new Intent(AuthentActivity.this, MainActivity.class);
         startActivity(intent);
+
     }
 }

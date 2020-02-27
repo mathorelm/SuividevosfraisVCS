@@ -30,7 +30,7 @@
         <activity android:name=".Vue.NuiteeActivity" />
         <activity android:name=".Vue.EtapeActivity" />
         <activity android:name=".Vue.RepasActivity" />
-        <activity android:name=".Vue.AuthentActivity" />
+        <activity android:name=".Vue.TransfertActivity" />
     </application>
     <uses-permission android:name="android.permission.INTERNET" />
 </manifest>

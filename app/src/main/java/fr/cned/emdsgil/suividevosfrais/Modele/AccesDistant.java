@@ -3,17 +3,12 @@ package fr.cned.emdsgil.suividevosfrais.Modele;
 import android.util.Log;
 
 
-import fr.cned.emdsgil.suividevosfrais.Modele.AccesHTTP;
-import fr.cned.emdsgil.suividevosfrais.Modele.AsyncResponse;
-import fr.cned.emdsgil.suividevosfrais.Vue.AuthentActivity;
+import fr.cned.emdsgil.suividevosfrais.Vue.TransfertActivity;
 
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.ArrayList;
-import java.util.Date;
 
 /**
  * Created by emds on 25/02/2018.
@@ -48,7 +43,7 @@ public class AccesDistant implements AsyncResponse {
             if (message[0].equals("check")) {
                 Log.d("check", "****************" + message[1]);
                 if (message[1] == "OK") {
-                    AuthentActivity.isAuthenticated = Boolean.TRUE;
+                    TransfertActivity.isAuthenticated = Boolean.TRUE;
                 }
             } else {
                 if (message[0].equals("fraisforfait")) {

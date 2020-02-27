@@ -2,17 +2,13 @@ package fr.cned.emdsgil.suividevosfrais.Vue;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.DatePicker;
-import android.widget.DatePicker.OnDateChangedListener;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -20,12 +16,8 @@ import org.json.JSONArray;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 import fr.cned.emdsgil.suividevosfrais.Modele.AccesDistant;
-import fr.cned.emdsgil.suividevosfrais.Modele.FraisMois;
-import fr.cned.emdsgil.suividevosfrais.Modele.Global;
-import fr.cned.emdsgil.suividevosfrais.Modele.Serializer;
 import fr.cned.emdsgil.suividevosfrais.R;
 
 //import android.support.v7.app.AppCompatActivity;
@@ -34,7 +26,7 @@ import fr.cned.emdsgil.suividevosfrais.R;
  * Activity d'authentification pour transfert des données
  * vers BDD distante.
  */
-public class AuthentActivity extends AppCompatActivity {
+public class TransfertActivity extends AppCompatActivity {
 
     public static Boolean isAuthenticated = Boolean.FALSE;
     // informations affichées dans l'activité
@@ -45,7 +37,7 @@ public class AuthentActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_authent);
+        setContentView(R.layout.activity_transfert);
         setTitle("GSB : Transférer les données locales");
         //Activation du bouton Valider
         cmdValider_clic();
@@ -129,7 +121,7 @@ public class AuthentActivity extends AppCompatActivity {
      * Retour à l'activité principale (le menu)
      */
     private void retourActivityPrincipale() {
-        Intent intent = new Intent(AuthentActivity.this, MainActivity.class);
+        Intent intent = new Intent(TransfertActivity.this, MainActivity.class);
         startActivity(intent);
 
     }

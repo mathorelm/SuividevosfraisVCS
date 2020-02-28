@@ -109,13 +109,16 @@ public class TransfertActivity extends AppCompatActivity {
         Set keys = Global.listFraisMois.keySet();
         Iterator itr = keys.iterator();
         Object key;
+        int cpt = 0;
         while (itr.hasNext()) {
             key = itr.next();
             lesFraisHorsForfait.add(key);
             ArrayList<FraisHf> listeHF = Global.listFraisMois.get(key).getLesFraisHf();
-            lesFraisHorsForfait.add(listeHF.get(0));
-            lesFraisHorsForfait.add(listeHF.get(1));
-            lesFraisHorsForfait.add(listeHF.get(2));
+            for (cpt = 0; cpt <= listeHF.size() - 1; cpt++) {
+                lesFraisHorsForfait.add(listeHF.get(cpt).getJour());
+                lesFraisHorsForfait.add(listeHF.get(cpt).getMotif());
+                lesFraisHorsForfait.add(listeHF.get(cpt).getMontant());
+            }
 
         }
         JSONArray FhF = new JSONArray(lesFraisHorsForfait);

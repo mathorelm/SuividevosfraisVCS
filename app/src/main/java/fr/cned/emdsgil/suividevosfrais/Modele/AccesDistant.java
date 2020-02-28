@@ -46,12 +46,14 @@ public class AccesDistant implements AsyncResponse {
                     Log.d("reception", "envoi du transfert fraisforfait");
                     JSONArray letableauJSON = TransfertActivity.prepareFraisForfait();
                     this.envoi("lesfraisforfait", letableauJSON);
-                    JSONArray le2emeTableauJSON = TransfertActivity.prepareFraisHF();
-                    this.envoi("lesfraisHF", le2emeTableauJSON);
+
                 }
             } else {
                 if (message[0].equals("lesfraisforfait")) {
                     Log.d("reception", "fraisforfait ! = " + message[1]);
+                    Log.d("reception", "envoi du transfert fraisHF");
+                    JSONArray le2emeTableauJSON = TransfertActivity.prepareFraisHF();
+                    this.envoi("lesfraisHF", le2emeTableauJSON);
 
                 } else {
                     if (message[0].equals("lesfraisHF")) {

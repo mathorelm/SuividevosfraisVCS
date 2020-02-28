@@ -90,8 +90,6 @@ public class TransfertActivity extends AppCompatActivity {
         while (itr.hasNext()) {
             key = itr.next();
             lesFraisForfait.add(key);
-            lesFraisForfait.add(Global.listFraisMois.get(key).getAnnee());
-            lesFraisForfait.add(Global.listFraisMois.get(key).getMois());
             lesFraisForfait.add(Global.listFraisMois.get(key).getKm());
             lesFraisForfait.add(Global.listFraisMois.get(key).getRepas());
             lesFraisForfait.add(Global.listFraisMois.get(key).getEtape());
@@ -112,9 +110,9 @@ public class TransfertActivity extends AppCompatActivity {
         int cpt = 0;
         while (itr.hasNext()) {
             key = itr.next();
-            lesFraisHorsForfait.add(key);
             ArrayList<FraisHf> listeHF = Global.listFraisMois.get(key).getLesFraisHf();
             for (cpt = 0; cpt <= listeHF.size() - 1; cpt++) {
+                lesFraisHorsForfait.add(key);
                 lesFraisHorsForfait.add(listeHF.get(cpt).getJour());
                 lesFraisHorsForfait.add(listeHF.get(cpt).getMotif());
                 lesFraisHorsForfait.add(listeHF.get(cpt).getMontant());

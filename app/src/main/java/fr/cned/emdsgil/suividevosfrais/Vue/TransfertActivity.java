@@ -20,9 +20,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-import fr.cned.emdsgil.suividevosfrais.Modele.AccesDistant;
+import fr.cned.emdsgil.suividevosfrais.Controleur.AccesDistant;
 import fr.cned.emdsgil.suividevosfrais.Modele.FraisHf;
-import fr.cned.emdsgil.suividevosfrais.Modele.Global;
+import fr.cned.emdsgil.suividevosfrais.Controleur.Global;
 import fr.cned.emdsgil.suividevosfrais.R;
 
 //import android.support.v7.app.AppCompatActivity;
@@ -38,6 +38,7 @@ public class TransfertActivity extends AppCompatActivity {
     private Integer annee;
     private Integer mois;
     private Integer etapes;
+    List lesDonneesAEnvoyer = new ArrayList();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,29 +81,7 @@ public class TransfertActivity extends AppCompatActivity {
         ((TextView) findViewById(R.id.txtEtapes)).setText(String.format(Locale.FRANCE, "%d", etapes));*/
     }
 
-    public static JSONArray prepareFraisForfait() {
-
-        List lesFraisForfait = new ArrayList();
-        //Remplir la liste avec les éléments extraits de la HashTable
-        Set keys = Global.listFraisMois.keySet();
-        Iterator itr = keys.iterator();
-        Object key;
-        while (itr.hasNext()) {
-            key = itr.next();
-            lesFraisForfait.add(key);
-            lesFraisForfait.add(Global.listFraisMois.get(key).getKm());
-            lesFraisForfait.add(Global.listFraisMois.get(key).getRepas());
-            lesFraisForfait.add(Global.listFraisMois.get(key).getEtape());
-            lesFraisForfait.add(Global.listFraisMois.get(key).getNuitee());
-        }
-
-        JSONArray FF = new JSONArray(lesFraisForfait);
-        Log.d("prepareFraisForfait", FF.toString());
-        return FF;
-    }
-
-    public static JSONArray prepareFraisHF() {
-        List lesFraisHorsForfait = new ArrayList();
+    public void prepareFrais() {
         //Remplir la liste avec les éléments extraits de la HashTable
         Set keys = Global.listFraisMois.keySet();
         Iterator itr = keys.iterator();
@@ -110,18 +89,21 @@ public class TransfertActivity extends AppCompatActivity {
         int cpt = 0;
         while (itr.hasNext()) {
             key = itr.next();
+            lesDonneesAEnvoyer.add("FF");
+            lesDonneesAEnvoyer.add(key);
+            lesDonneesAEnvoyer.add(Global.listFraisMois.get(key).getEtape());
+            lesDonneesAEnvoyer.add(Global.listFraisMois.get(key).getKm());
+            lesDonneesAEnvoyer.add(Global.listFraisMois.get(key).getNuitee());
+            lesDonneesAEnvoyer.add(Global.listFraisMois.get(key).getRepas());
             ArrayList<FraisHf> listeHF = Global.listFraisMois.get(key).getLesFraisHf();
             for (cpt = 0; cpt <= listeHF.size() - 1; cpt++) {
-                lesFraisHorsForfait.add(key);
-                lesFraisHorsForfait.add(listeHF.get(cpt).getJour());
-                lesFraisHorsForfait.add(listeHF.get(cpt).getMotif());
-                lesFraisHorsForfait.add(listeHF.get(cpt).getMontant());
+                lesDonneesAEnvoyer.add("HF");
+                lesDonneesAEnvoyer.add(key);
+                lesDonneesAEnvoyer.add(listeHF.get(cpt).getJour());
+                lesDonneesAEnvoyer.add(listeHF.get(cpt).getMotif());
+                lesDonneesAEnvoyer.add(listeHF.get(cpt).getMontant());
             }
-
         }
-        JSONArray FhF = new JSONArray(lesFraisHorsForfait);
-        Log.d("prepareFraisHorsForfait", FhF.toString());
-        return FhF;
     }
 
     /**
@@ -146,12 +128,14 @@ public class TransfertActivity extends AppCompatActivity {
 
                 String mdp = ((EditText) findViewById(R.id.txtTransfertMdp)).getText().toString();
 
-                List list = new ArrayList();
-                list.add(login);
-                list.add(mdp);
-                JSONArray login_mdp = new JSONArray(list);
+                lesDonneesAEnvoyer.clear();
+                lesDonneesAEnvoyer.add(login);
+                lesDonneesAEnvoyer.add(mdp);
+                prepareFrais();
+                JSONArray lesDonnees = new JSONArray(lesDonneesAEnvoyer);
                 AccesDistant monacces = new AccesDistant();
-                monacces.envoi("check", login_mdp);
+                monacces.envoi("check", lesDonnees);
+                Log.d("envoi", lesDonneesAEnvoyer.toString());
             }
         });
     }

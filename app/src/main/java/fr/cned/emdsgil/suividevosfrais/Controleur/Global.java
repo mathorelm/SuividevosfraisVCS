@@ -1,18 +1,14 @@
-package fr.cned.emdsgil.suividevosfrais.Modele;
+package fr.cned.emdsgil.suividevosfrais.Controleur;
 
 import android.content.res.Resources;
 import android.util.Log;
 import android.view.View;
 import android.widget.DatePicker;
 
-import org.json.JSONArray;
-
 import java.lang.reflect.Field;
-import java.util.ArrayList;
 import java.util.Hashtable;
-import java.util.List;
 
-import fr.cned.emdsgil.suividevosfrais.Modele.FraisMois;
+import fr.cned.emdsgil.suividevosfrais.Controleur.FraisMois;
 
 public abstract class Global {
 

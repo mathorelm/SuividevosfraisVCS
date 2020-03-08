@@ -17,7 +17,7 @@ import java.util.ArrayList;
 
 import fr.cned.emdsgil.suividevosfrais.Modele.FraisHf;
 import fr.cned.emdsgil.suividevosfrais.Modele.FraisHfAdapter;
-import fr.cned.emdsgil.suividevosfrais.Modele.Global;
+import fr.cned.emdsgil.suividevosfrais.Controleur.Global;
 import fr.cned.emdsgil.suividevosfrais.R;
 
 public class HfRecapActivity extends AppCompatActivity {

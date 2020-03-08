@@ -11,6 +11,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.Locale;
 
+import fr.cned.emdsgil.suividevosfrais.Controleur.Global;
 import fr.cned.emdsgil.suividevosfrais.R;
 
 public class FraisHfAdapter extends BaseAdapter {

@@ -1,4 +1,4 @@
-package fr.cned.emdsgil.suividevosfrais.Modele;
+package fr.cned.emdsgil.suividevosfrais.Outils;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -9,8 +9,6 @@ import java.net.URL;
 import java.net.URLEncoder;
 
 import android.os.AsyncTask;
-
-import fr.cned.emdsgil.suividevosfrais.Modele.AsyncResponse;
 
 /**
  * Classe technique de connexion distante HTTP

@@ -1,14 +1,13 @@
-package fr.cned.emdsgil.suividevosfrais.Modele;
+package fr.cned.emdsgil.suividevosfrais.Controleur;
 
 import android.util.Log;
 
 
-import fr.cned.emdsgil.suividevosfrais.Vue.TransfertActivity;
+import fr.cned.emdsgil.suividevosfrais.Outils.AccesHTTP;
+import fr.cned.emdsgil.suividevosfrais.Outils.AsyncResponse;
 
 
 import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 /**
  * Created by emds on 25/02/2018.
@@ -41,29 +40,14 @@ public class AccesDistant implements AsyncResponse {
         // contrôle si le retour est correct (au moins 2 cases)
         if (message.length > 1) {
             if (message[0].equals("check")) {
-
                 if (message[1].equals("OK")) {
-                    Log.d("reception", "envoi du transfert fraisforfait");
-                    JSONArray letableauJSON = TransfertActivity.prepareFraisForfait();
-                    this.envoi("lesfraisforfait", letableauJSON);
-
+                    Log.d("reception", "Transmission effectuée !");
                 }
             } else {
-                if (message[0].equals("lesfraisforfait")) {
-                    Log.d("reception", "fraisforfait ! = " + message[1]);
-                    Log.d("reception", "envoi du transfert fraisHF");
-                    JSONArray le2emeTableauJSON = TransfertActivity.prepareFraisHF();
-                    this.envoi("lesfraisHF", le2emeTableauJSON);
-
-                } else {
-                    if (message[0].equals("lesfraisHF")) {
-                        Log.d("reception", "fraisHF ! = " + message[1]);
-                    } else {
-                        if (message[0].equals("Erreur !")) {
-                            Log.d("Erreur !", "****************" + message[1]);
-                        }
-                    }
-                }
+                Log.d("reception", "Tranmission ratée...");
+            }
+            if (message[0].equals("Erreur !")) {
+                Log.d("reception", message[1]);
             }
         }
     }

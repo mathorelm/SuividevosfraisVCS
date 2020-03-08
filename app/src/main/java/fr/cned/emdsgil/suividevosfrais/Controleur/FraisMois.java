@@ -1,7 +1,9 @@
-package fr.cned.emdsgil.suividevosfrais.Modele;
+package fr.cned.emdsgil.suividevosfrais.Controleur;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+
+import fr.cned.emdsgil.suividevosfrais.Modele.FraisHf;
 
 /**
  * Classe métier contenant les informations des frais d'un mois

@@ -1,6 +1,9 @@
 package fr.cned.emdsgil.suividevosfrais.Vue;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -10,6 +13,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -34,6 +39,7 @@ import fr.cned.emdsgil.suividevosfrais.R;
 public class TransfertActivity extends AppCompatActivity {
 
     public static Boolean isAuthenticated = Boolean.FALSE;
+    public static String serveurMessage = "";
     // informations affichées dans l'activité
     private Integer annee;
     private Integer mois;
@@ -64,21 +70,25 @@ public class TransfertActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
-
     /**
-     * Valorisation des propriétés avec les informations affichées
+     * Vérifie si une connection à Internet est disponible pour transférer
+     * les donnée
+     * @param context Contexte appelant
+     * @return true si connection Internet disponible, false sinon
      */
-    private void valoriseProprietes() {
-        /*annee = ((DatePicker) findViewById(R.id.datEtape)).getYear();
-        mois = ((DatePicker) findViewById(R.id.datEtape)).getMonth() + 1;
-        // récupération de la etapes correspondant au mois actuel
-        etapes = 0;
-        Integer key = annee * 100 + mois;
-        if (Global.listFraisMois.containsKey(key)) {
-            etapes = Global.listFraisMois.get(key).getEtape();
+    public static boolean isConnectingToInternet(Context context) {
+        ConnectivityManager connectivity =
+                (ConnectivityManager) context.getSystemService(
+                        Context.CONNECTIVITY_SERVICE);
+        if (connectivity != null) {
+            NetworkInfo[] info = connectivity.getAllNetworkInfo();
+            if (info != null)
+                for (int i = 0; i < info.length; i++)
+                    if (info[i].getState() == NetworkInfo.State.CONNECTED) {
+                        return true;
+                    }
         }
-        ((TextView) findViewById(R.id.txtEtapes)).setText(String.format(Locale.FRANCE, "%d", etapes));*/
+        return false;
     }
 
     public void prepareFrais() {
@@ -118,24 +128,44 @@ public class TransfertActivity extends AppCompatActivity {
     }
 
     /**
-     * Sur le clic du bouton valider : sérialisation
+     * Sur le clic du bouton valider : transmission distante
      */
     private void cmdValider_clic() {
         findViewById(R.id.cmdAuthentValider).setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
-                //Effectuer la vérification mot de passe
+                findViewById(R.id.cmdAuthentValider).setEnabled(Boolean.FALSE);
                 String login = ((EditText) findViewById(R.id.txtTransfertLogin)).getText().toString();
-
                 String mdp = ((EditText) findViewById(R.id.txtTransfertMdp)).getText().toString();
-
                 lesDonneesAEnvoyer.clear();
                 lesDonneesAEnvoyer.add(login);
                 lesDonneesAEnvoyer.add(mdp);
                 prepareFrais();
-                JSONArray lesDonnees = new JSONArray(lesDonneesAEnvoyer);
-                AccesDistant monacces = new AccesDistant();
-                monacces.envoi("check", lesDonnees);
-                Log.d("envoi", lesDonneesAEnvoyer.toString());
+                if (isConnectingToInternet(TransfertActivity.this)) {
+
+                    JSONArray lesDonnees = new JSONArray(lesDonneesAEnvoyer);
+                    AccesDistant monacces = new AccesDistant();
+                    monacces.envoi("check", lesDonnees);
+                    findViewById(R.id.transfertText).setVisibility(View.VISIBLE);
+                    findViewById(R.id.transfertAttente).setVisibility(View.VISIBLE);
+                    Log.d("envoi", lesDonneesAEnvoyer.toString());
+                    serveurMessage = "";
+                    //TODO attendre retour du serveur...
+                    try {
+
+                        do {
+                            TransfertActivity.this.wait();
+                        } while (serveurMessage.equals(""));
+                        ((TextView) findViewById(R.id.transfertText)).setText(serveurMessage);
+                        findViewById(R.id.transfertAttente).setVisibility(View.INVISIBLE);
+                    } catch (Exception e) {
+                        Log.d("exception", e.getMessage());
+                    }
+                    //findViewById(R.id.cmdAuthentValider).setEnabled(Boolean.TRUE);
+                    //retourActivityPrincipale();
+                } else {
+                    Toast.makeText(getApplicationContext(), "Aucune connection disponible. Veuillez réessayer ultérieurement.", Toast.LENGTH_LONG).show();
+                }
+
             }
         });
     }

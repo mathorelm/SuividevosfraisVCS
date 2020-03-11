@@ -16,7 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.Locale;
 
-import fr.cned.emdsgil.suividevosfrais.Controleur.FraisMois;
+import fr.cned.emdsgil.suividevosfrais.Modele.FraisMois;
 import fr.cned.emdsgil.suividevosfrais.Controleur.Global;
 import fr.cned.emdsgil.suividevosfrais.Modele.Serializer;
 import fr.cned.emdsgil.suividevosfrais.R;

@@ -1,4 +1,4 @@
-package fr.cned.emdsgil.suividevosfrais.Controleur;
+package fr.cned.emdsgil.suividevosfrais.Modele;
 
 import java.io.Serializable;
 import java.util.ArrayList;

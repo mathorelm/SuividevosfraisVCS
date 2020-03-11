@@ -8,7 +8,7 @@ import android.widget.DatePicker;
 import java.lang.reflect.Field;
 import java.util.Hashtable;
 
-import fr.cned.emdsgil.suividevosfrais.Controleur.FraisMois;
+import fr.cned.emdsgil.suividevosfrais.Modele.FraisMois;
 
 public abstract class Global {
 

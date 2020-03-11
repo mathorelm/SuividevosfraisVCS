@@ -34,7 +34,7 @@
                 android:layout_gravity="end"
                 android:layout_weight="1"
                 android:contentDescription="@string/icone_transfert"
-                android:src="@drawable/frais_etape"
+                android:src="@drawable/transfert"
                 app:srcCompat="@drawable/transfert" />
         </LinearLayout>
 
@@ -100,6 +100,24 @@
             android:ems="10"
             android:gravity="center_horizontal|center_vertical"
             android:inputType="textPassword" />
+
+        <TextView
+            android:id="@+id/transfertText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:text="Patientez pendant le transfert de données..."
+            android:textAlignment="center"
+            android:visibility="invisible" />
+
+        <ImageView
+            android:id="@+id/transfertAttente"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0"
+            android:visibility="invisible"
+            app:srcCompat="@drawable/attente" />
+
     </LinearLayout>
 
     <LinearLayout
@@ -107,7 +125,9 @@
         android:layout_height="0dp"
         android:layout_weight="0.2"
         android:baselineAligned="false"
-        android:gravity="center" />
+        android:gravity="center">
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"

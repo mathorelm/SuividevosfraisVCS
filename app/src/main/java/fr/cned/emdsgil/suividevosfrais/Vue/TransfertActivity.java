@@ -38,7 +38,6 @@ import fr.cned.emdsgil.suividevosfrais.R;
  */
 public class TransfertActivity extends AppCompatActivity {
 
-    public static Boolean isAuthenticated = Boolean.FALSE;
     public static String serveurMessage = "";
     // informations affichées dans l'activité
     private Integer annee;
@@ -143,8 +142,8 @@ public class TransfertActivity extends AppCompatActivity {
                 if (isConnectingToInternet(TransfertActivity.this)) {
 
                     JSONArray lesDonnees = new JSONArray(lesDonneesAEnvoyer);
-                    AccesDistant monacces = new AccesDistant();
-                    monacces.envoi("check", lesDonnees);
+                    AccesDistant monAcces = new AccesDistant();
+                    monAcces.envoi("check", lesDonnees);
                     findViewById(R.id.transfertText).setVisibility(View.VISIBLE);
                     findViewById(R.id.transfertAttente).setVisibility(View.VISIBLE);
                     Log.d("envoi", lesDonneesAEnvoyer.toString());

@@ -4,6 +4,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 
+import fr.cned.emdsgil.suividevosfrais.Modele.Serializer;
 import fr.cned.emdsgil.suividevosfrais.Outils.AccesHTTP;
 import fr.cned.emdsgil.suividevosfrais.Outils.AsyncResponse;
 
@@ -76,6 +77,13 @@ public class AccesDistant implements AsyncResponse {
                 if (message[1].equals("OK")) {
                     Log.d("reception", "Transmission effectuée !");
                     TransfertActivity.serveurMessage = "Transmission effectuée !";
+                    //suppression de la base sérialisée locale
+                    Boolean reussite = Serializer.supprimerFichier();
+                    if (reussite) {
+                        Log.d("Fichier local", "suppression du fichier reussie !");
+                    } else {
+                        Log.d("Fichier local", "echec de suppression du fichier !");
+                    }
                 }
             } else {
                 Log.d("reception", "Tranmission ratée...");

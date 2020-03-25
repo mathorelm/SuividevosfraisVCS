@@ -1,13 +1,16 @@
 package fr.cned.emdsgil.suividevosfrais.Modele;
 
 import android.content.Context;
+import android.util.Log;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.nio.file.FileSystemNotFoundException;
 
 import fr.cned.emdsgil.suividevosfrais.Controleur.Global;
 
@@ -39,6 +42,16 @@ public abstract class Serializer {
         } catch (FileNotFoundException e) {
             // fichier non trouvé
             e.printStackTrace();
+        }
+    }
+
+    public static Boolean supprimerFichier() {
+        try {
+            File fichier = new File(Global.filename);
+            return fichier.delete();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
         }
     }
 

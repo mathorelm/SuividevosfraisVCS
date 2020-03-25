@@ -148,19 +148,7 @@ public class TransfertActivity extends AppCompatActivity {
                     findViewById(R.id.transfertAttente).setVisibility(View.VISIBLE);
                     Log.d("envoi", lesDonneesAEnvoyer.toString());
                     serveurMessage = "";
-                    //TODO attendre retour du serveur...
-                    try {
-
-                        do {
-                            TransfertActivity.this.wait();
-                        } while (serveurMessage.equals(""));
-                        ((TextView) findViewById(R.id.transfertText)).setText(serveurMessage);
-                        findViewById(R.id.transfertAttente).setVisibility(View.INVISIBLE);
-                    } catch (Exception e) {
-                        Log.d("exception", e.getMessage());
-                    }
-                    //findViewById(R.id.cmdAuthentValider).setEnabled(Boolean.TRUE);
-                    //retourActivityPrincipale();
+                    retourActivityPrincipale();
                 } else {
                     Toast.makeText(getApplicationContext(), "Aucune connection disponible. Veuillez réessayer ultérieurement.", Toast.LENGTH_LONG).show();
                 }

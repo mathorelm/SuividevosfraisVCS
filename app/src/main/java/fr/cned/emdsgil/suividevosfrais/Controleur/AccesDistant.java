@@ -10,7 +10,9 @@ import fr.cned.emdsgil.suividevosfrais.Outils.AsyncResponse;
 import fr.cned.emdsgil.suividevosfrais.Vue.TransfertActivity;
 
 /**
- * Created by emds on 25/02/2018.
+ * \author emds
+ * \date 25/02/2018
+ * \brief permet d'accéder à la base distante
  */
 
 public class AccesDistant implements AsyncResponse {
@@ -28,7 +30,7 @@ public class AccesDistant implements AsyncResponse {
     /**
      * Retour du serveur HTTP
      *
-     * @param output
+     * @param output chaîne récupérée en provenance du serveur
      */
     @Override
     public void processFinish(String output) {
@@ -45,15 +47,20 @@ public class AccesDistant implements AsyncResponse {
                     //suppression de la base sérialisée locale
                     Boolean reussite = Serializer.supprimerFichier();
                     if (reussite) {
-                        Log.d("Fichier local", "suppression du fichier reussie !");
+                        Log.d("reception", "suppression du fichier reussie !");
                     } else {
-                        Log.d("Fichier local", "echec de suppression du fichier !");
+                        Log.d("reception", "echec de suppression du fichier !");
                     }
+                }
+                if (message[1].equals("MDP")) {
+                    Log.d("reception", "erreur de mot de passe !");
+                    TransfertActivity.serveurMessage = "Erreur de login/mot de passe";
                 }
             } else {
                 Log.d("reception", "Tranmission ratée...");
                 TransfertActivity.serveurMessage = "Echec de transmission !";
             }
+
             if (message[0].equals("Erreur !")) {
                 Log.d("reception", message[1]);
                 TransfertActivity.serveurMessage = "Erreur : " + message[1];

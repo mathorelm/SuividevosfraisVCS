@@ -90,7 +90,6 @@ public class FraisHfAdapter extends BaseAdapter {
                 } else {
                     //lancer une exception ?
                 }
-                ;
                 //mettre à jour la liste visuelle
                 notifyDataSetChanged();
             }

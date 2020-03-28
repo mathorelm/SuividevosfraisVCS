@@ -35,6 +35,7 @@ public abstract class Serializer {
                 oos.writeObject(object);
                 oos.flush();
                 oos.close();
+                file.close();
             } catch (IOException e) {
                 // erreur de sérialisation
                 e.printStackTrace();
@@ -47,10 +48,12 @@ public abstract class Serializer {
 
     public static Boolean supprimerFichier() {
         try {
+
             File fichier = new File(Global.filename);
-            return fichier.delete();
+            fichier.delete();
+            Global.listFraisMois.clear();
+            return true;
         } catch (Exception e) {
-            e.printStackTrace();
             return false;
         }
     }
@@ -70,13 +73,12 @@ public abstract class Serializer {
                 try {
                     Object object = ois.readObject();
                     ois.close();
+                    file.close();
                     return object;
                 } catch (ClassNotFoundException e) {
-                    // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
             } catch (IOException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
         } catch (FileNotFoundException e) {

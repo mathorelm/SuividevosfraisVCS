@@ -3,6 +3,7 @@ package fr.cned.emdsgil.suividevosfrais.Vue;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
+import android.net.Network;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.util.Log;
@@ -71,21 +72,20 @@ public class TransfertActivity extends AppCompatActivity {
     }
     /**
      * Vérifie si une connection à Internet est disponible pour transférer
-     * les donnée
+     * les données
      * @param context Contexte appelant
      * @return true si connection Internet disponible, false sinon
      */
     public static boolean isConnectingToInternet(Context context) {
-        ConnectivityManager connectivity =
+        ConnectivityManager cm =
                 (ConnectivityManager) context.getSystemService(
                         Context.CONNECTIVITY_SERVICE);
-        if (connectivity != null) {
-            NetworkInfo[] info = connectivity.getAllNetworkInfo();
-            if (info != null)
-                for (int i = 0; i < info.length; i++)
-                    if (info[i].getState() == NetworkInfo.State.CONNECTED) {
-                        return true;
-                    }
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        if (activeNetwork != null) {
+            if ((activeNetwork.getType() == ConnectivityManager.TYPE_WIFI) ||
+                    (activeNetwork.getType() == ConnectivityManager.TYPE_MOBILE)) {
+                return true;
+            }
         }
         return false;
     }

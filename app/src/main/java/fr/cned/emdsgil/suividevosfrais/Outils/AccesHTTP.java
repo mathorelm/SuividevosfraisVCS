@@ -30,8 +30,8 @@ public class AccesHTTP extends AsyncTask<String, Integer, Long> {
     /**
      * Construction de la chaîne de paramètres à envoyer en POST au serveur
      *
-     * @param nom
-     * @param valeur
+     * @param nom chaîne représentant le nom du paramètre à renseigner
+     * @param valeur chaîne contenant la valeur à associer au paramètre passé
      */
     public void addParam(String nom, String valeur) {
         try {
@@ -101,7 +101,7 @@ public class AccesHTTP extends AsyncTask<String, Integer, Long> {
     /**
      * Sur le retour du serveur, envoi l'information retournée à processFinish
      *
-     * @param result
+     * @param result élément transmis vers processFinish avec conversion en String.
      */
     @Override
     protected void onPostExecute(Long result) {

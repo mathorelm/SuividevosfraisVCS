@@ -1,4 +1,4 @@
-package fr.cned.emdsgil.suividevosfrais.Vue;
+package fr.cned.emdsgil.suividevosfrais.vue;
 
 import android.os.Bundle;
 //import android.support.v7.app.AppCompatActivity;
@@ -16,9 +16,9 @@ import android.widget.TextView;
 
 import java.util.Locale;
 
-import fr.cned.emdsgil.suividevosfrais.Modele.FraisMois;
-import fr.cned.emdsgil.suividevosfrais.Controleur.Global;
-import fr.cned.emdsgil.suividevosfrais.Modele.Serializer;
+import fr.cned.emdsgil.suividevosfrais.modele.FraisMois;
+import fr.cned.emdsgil.suividevosfrais.controleur.Global;
+import fr.cned.emdsgil.suividevosfrais.modele.Serializer;
 import fr.cned.emdsgil.suividevosfrais.R;
 
 public class KmActivity extends AppCompatActivity {
@@ -156,7 +156,7 @@ public class KmActivity extends AppCompatActivity {
      * Retour à l'activité principale (le menu)
      */
     private void retourActivityPrincipale() {
-        Intent intent = new Intent(KmActivity.this, MainActivity.class);
+        Intent intent = new Intent(KmActivity.this, fr.cned.emdsgil.suividevosfrais.vue.MainActivity.class);
         startActivity(intent);
     }
 }

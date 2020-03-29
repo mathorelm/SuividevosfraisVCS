@@ -1,4 +1,4 @@
-package fr.cned.emdsgil.suividevosfrais.Vue;
+package fr.cned.emdsgil.suividevosfrais.vue;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,9 +12,9 @@ import android.widget.ImageButton;
 
 import java.util.Hashtable;
 
-import fr.cned.emdsgil.suividevosfrais.Modele.FraisMois;
-import fr.cned.emdsgil.suividevosfrais.Controleur.Global;
-import fr.cned.emdsgil.suividevosfrais.Modele.Serializer;
+import fr.cned.emdsgil.suividevosfrais.modele.FraisMois;
+import fr.cned.emdsgil.suividevosfrais.controleur.Global;
+import fr.cned.emdsgil.suividevosfrais.modele.Serializer;
 import fr.cned.emdsgil.suividevosfrais.R;
 
 public class MainActivity extends AppCompatActivity {

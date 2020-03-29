@@ -1,4 +1,4 @@
-package fr.cned.emdsgil.suividevosfrais.Vue;
+package fr.cned.emdsgil.suividevosfrais.vue;
 
 import android.content.Context;
 import android.content.Intent;
@@ -26,9 +26,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-import fr.cned.emdsgil.suividevosfrais.Controleur.AccesDistant;
-import fr.cned.emdsgil.suividevosfrais.Modele.FraisHf;
-import fr.cned.emdsgil.suividevosfrais.Controleur.Global;
+import fr.cned.emdsgil.suividevosfrais.controleur.AccesDistant;
+import fr.cned.emdsgil.suividevosfrais.modele.FraisHf;
+import fr.cned.emdsgil.suividevosfrais.controleur.Global;
 import fr.cned.emdsgil.suividevosfrais.R;
 
 //import android.support.v7.app.AppCompatActivity;

@@ -10,7 +10,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Vue.MainActivity">
+        <activity android:name=".vue.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />
@@ -24,13 +24,13 @@
                     android:scheme="http" />
             </intent-filter>
         </activity>
-        <activity android:name=".Vue.HfActivity" />
-        <activity android:name=".Vue.HfRecapActivity" />
-        <activity android:name=".Vue.KmActivity" />
-        <activity android:name=".Vue.NuiteeActivity" />
-        <activity android:name=".Vue.EtapeActivity" />
-        <activity android:name=".Vue.RepasActivity" />
-        <activity android:name=".Vue.TransfertActivity" />
+        <activity android:name=".vue.HfActivity" />
+        <activity android:name=".vue.HfRecapActivity" />
+        <activity android:name=".vue.KmActivity" />
+        <activity android:name=".vue.NuiteeActivity" />
+        <activity android:name=".vue.EtapeActivity" />
+        <activity android:name=".vue.RepasActivity" />
+        <activity android:name=".vue.TransfertActivity" />
     </application>
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />

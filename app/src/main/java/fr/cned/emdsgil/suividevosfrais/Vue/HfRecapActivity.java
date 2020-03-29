@@ -1,4 +1,4 @@
-package fr.cned.emdsgil.suividevosfrais.Vue;
+package fr.cned.emdsgil.suividevosfrais.vue;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,9 +15,9 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
-import fr.cned.emdsgil.suividevosfrais.Modele.FraisHf;
-import fr.cned.emdsgil.suividevosfrais.Modele.FraisHfAdapter;
-import fr.cned.emdsgil.suividevosfrais.Controleur.Global;
+import fr.cned.emdsgil.suividevosfrais.modele.FraisHf;
+import fr.cned.emdsgil.suividevosfrais.modele.FraisHfAdapter;
+import fr.cned.emdsgil.suividevosfrais.controleur.Global;
 import fr.cned.emdsgil.suividevosfrais.R;
 
 public class HfRecapActivity extends AppCompatActivity {

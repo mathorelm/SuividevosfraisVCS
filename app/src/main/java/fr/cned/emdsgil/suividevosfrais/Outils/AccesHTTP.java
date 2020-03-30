@@ -1,4 +1,4 @@
-package fr.cned.emdsgil.suividevosfrais.Outils;
+package fr.cned.emdsgil.suividevosfrais.outils;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;

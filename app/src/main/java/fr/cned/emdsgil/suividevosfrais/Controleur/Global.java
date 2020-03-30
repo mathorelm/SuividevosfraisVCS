@@ -1,4 +1,4 @@
-package fr.cned.emdsgil.suividevosfrais.Controleur;
+package fr.cned.emdsgil.suividevosfrais.controleur;
 
 import android.content.res.Resources;
 import android.util.Log;
@@ -8,7 +8,7 @@ import android.widget.DatePicker;
 import java.lang.reflect.Field;
 import java.util.Hashtable;
 
-import fr.cned.emdsgil.suividevosfrais.Modele.FraisMois;
+import fr.cned.emdsgil.suividevosfrais.modele.FraisMois;
 
 public abstract class Global {
 

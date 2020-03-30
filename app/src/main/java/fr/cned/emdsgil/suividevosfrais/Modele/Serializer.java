@@ -1,18 +1,15 @@
-package fr.cned.emdsgil.suividevosfrais.Modele;
+package fr.cned.emdsgil.suividevosfrais.modele;
 
 import android.content.Context;
-import android.util.Log;
-
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.nio.file.FileSystemNotFoundException;
 
-import fr.cned.emdsgil.suividevosfrais.Controleur.Global;
+
+import fr.cned.emdsgil.suividevosfrais.controleur.Global;
 
 /**
  * Classe qui permet de sérialiser et désérialiser des objets
@@ -43,18 +40,6 @@ public abstract class Serializer {
         } catch (FileNotFoundException e) {
             // fichier non trouvé
             e.printStackTrace();
-        }
-    }
-
-    public static Boolean supprimerFichier() {
-        try {
-
-            File fichier = new File(Global.filename);
-            fichier.delete();
-            Global.listFraisMois.clear();
-            return true;
-        } catch (Exception e) {
-            return false;
         }
     }
 

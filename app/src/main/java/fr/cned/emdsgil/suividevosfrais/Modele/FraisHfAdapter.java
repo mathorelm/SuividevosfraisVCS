@@ -1,4 +1,4 @@
-package fr.cned.emdsgil.suividevosfrais.Modele;
+package fr.cned.emdsgil.suividevosfrais.modele;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -11,7 +11,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.Locale;
 
-import fr.cned.emdsgil.suividevosfrais.Controleur.Global;
+import fr.cned.emdsgil.suividevosfrais.controleur.Global;
 import fr.cned.emdsgil.suividevosfrais.R;
 
 public class FraisHfAdapter extends BaseAdapter {

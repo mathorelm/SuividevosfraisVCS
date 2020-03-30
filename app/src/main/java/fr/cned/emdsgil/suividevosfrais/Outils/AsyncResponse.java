@@ -1,4 +1,4 @@
-package fr.cned.emdsgil.suividevosfrais.Outils;
+package fr.cned.emdsgil.suividevosfrais.outils;
 
 /**
  * Created by emds on 07/08/2015.

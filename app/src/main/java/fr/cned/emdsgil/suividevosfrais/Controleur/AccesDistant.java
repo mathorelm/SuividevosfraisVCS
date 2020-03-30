@@ -1,13 +1,12 @@
-package fr.cned.emdsgil.suividevosfrais.Controleur;
+package fr.cned.emdsgil.suividevosfrais.controleur;
 
 import android.util.Log;
 
 import org.json.JSONArray;
 
-import fr.cned.emdsgil.suividevosfrais.Modele.Serializer;
-import fr.cned.emdsgil.suividevosfrais.Outils.AccesHTTP;
-import fr.cned.emdsgil.suividevosfrais.Outils.AsyncResponse;
-import fr.cned.emdsgil.suividevosfrais.Vue.TransfertActivity;
+import fr.cned.emdsgil.suividevosfrais.outils.AccesHTTP;
+import fr.cned.emdsgil.suividevosfrais.outils.AsyncResponse;
+import fr.cned.emdsgil.suividevosfrais.vue.TransfertActivity;
 
 /**
  * \author emds
@@ -44,13 +43,8 @@ public class AccesDistant implements AsyncResponse {
                 if (message[1].equals("OK")) {
                     Log.d("reception", "Transmission effectuée !");
                     TransfertActivity.serveurMessage = "Transmission effectuée !";
-                    //suppression de la base sérialisée locale
-                    Boolean reussite = Serializer.supprimerFichier();
-                    if (reussite) {
-                        Log.d("reception", "suppression du fichier reussie !");
-                    } else {
-                        Log.d("reception", "echec de suppression du fichier !");
-                    }
+                    //TODO : comment supprimer la base locale et éviter une nouvelle saisie des données ?
+                    //TODO : en fait non...archivage local en permanence...
                 }
                 if (message[1].equals("MDP")) {
                     Log.d("reception", "erreur de mot de passe !");

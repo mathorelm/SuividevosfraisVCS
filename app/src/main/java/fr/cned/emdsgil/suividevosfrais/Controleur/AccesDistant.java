@@ -67,7 +67,7 @@ public class AccesDistant implements AsyncResponse {
      * \details cette fonction envoi des données en POST vers le serveur
      *          avec les paramètres fournis
      * \param operation    \e String information précisant au serveur l'opération à exécuter
-     * \param lesDonnesJSON \e String les données à traiter par le serveur.
+     * \param lesDonneesJSON \e String les données à traiter par le serveur.
      */
     public void envoi(String operation, JSONArray lesDonneesJSON) {
         AccesHTTP accesDonnees = new AccesHTTP();

@@ -45,6 +45,7 @@ public class FraisMois implements Serializable {
      * \details Valorise le tableau privé lesFraisHf
      * \param montant \e Float Montant en euros du frais hors forfait
      * \param motif \e Justification du frais
+     * \param jour \e Integer Jour concerné par le frais
      */
     public void addFraisHf(Float montant, String motif, Integer jour) {
         lesFraisHf.add(new FraisHf(montant, motif, jour));

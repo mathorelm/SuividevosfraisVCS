@@ -106,7 +106,6 @@ public class AccesHTTP extends AsyncTask<String, Integer, Long> {
      * \details Renvoie le résultat du serveur à \e processFinish via la variable \e ret
      *          et l'objet \e delegate
      * \param result \e Long code résultat
-     * \param context \e Context contexte appelant la sérialisation (obligatoire)
      */
     @Override
     protected void onPostExecute(Long result) {

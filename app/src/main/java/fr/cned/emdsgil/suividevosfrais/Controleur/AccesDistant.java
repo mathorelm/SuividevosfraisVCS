@@ -10,8 +10,14 @@ import fr.cned.emdsgil.suividevosfrais.vue.TransfertActivity;
 
 /**
  * \author emds
- * \date 25/02/2018
+ * \author mise à jour par louis-marin mathorel
+ * \version 2.0
+ * \date 25/02/2018 (creation) 30/03/2020 (mise à jour)
+ * \class AccesDistant AccesDistant.java
  * \brief permet d'accéder à la base distante
+ *
+ * \details Met en place un envoi de données POST puis un thread
+ *          d'attente de réponse du serveur HTTP.
  */
 
 public class AccesDistant implements AsyncResponse {
@@ -20,53 +26,48 @@ public class AccesDistant implements AsyncResponse {
     private static final String SERVERADDR = "http://www.gsb2020.org/Android/index.php";
 
     /**
-     * Constructeur
+     * \brief Constructeur
      */
     public AccesDistant() {
         super();
     }
 
     /**
-     * Retour du serveur HTTP
-     *
-     * @param output chaîne récupérée en provenance du serveur
+     * \brief Retour du serveur HTTP
+     * \details cette fonction est déclenchée par le thread
+     *          lorsqu'une donnée entrante arrive du serveur
+     * \param output    \e String contenant les données
      */
     @Override
     public void processFinish(String output) {
-        // pour vérification, affiche le contenu du retour dans la console
-        Log.d("retourserveur", output);
-        // découpage du message reçu
         String[] message = output.split("%");
         // contrôle si le retour est correct (au moins 2 cases)
         if (message.length > 1) {
+            //Renseigne .serveurMessage : mesure conservatoire pour utilisation future.
+            //TODO utiliser .serveurMessage pour améliorer la communication vers l'utilisateur
             if (message[0].equals("check")) {
                 if (message[1].equals("OK")) {
-                    Log.d("reception", "Transmission effectuée !");
                     TransfertActivity.serveurMessage = "Transmission effectuée !";
-                    //TODO : comment supprimer la base locale et éviter une nouvelle saisie des données ?
-                    //TODO : en fait non...archivage local en permanence...
                 }
                 if (message[1].equals("MDP")) {
-                    Log.d("reception", "erreur de mot de passe !");
                     TransfertActivity.serveurMessage = "Erreur de login/mot de passe";
                 }
             } else {
-                Log.d("reception", "Tranmission ratée...");
                 TransfertActivity.serveurMessage = "Echec de transmission !";
             }
 
             if (message[0].equals("Erreur !")) {
-                Log.d("reception", message[1]);
                 TransfertActivity.serveurMessage = "Erreur : " + message[1];
             }
         }
     }
 
     /**
-     * Envoi de données vers le serveur distant
-     *
-     * @param operation      information précisant au serveur l'opération à exécuter
-     * @param lesDonneesJSON les données à traiter par le serveur
+     * \brief Envoi de données vers le serveur distant
+     * \details cette fonction envoi des données en POST vers le serveur
+     *          avec les paramètres fournis
+     * \param operation    \e String information précisant au serveur l'opération à exécuter
+     * \param lesDonnesJSON \e String les données à traiter par le serveur.
      */
     public void envoi(String operation, JSONArray lesDonneesJSON) {
         AccesHTTP accesDonnees = new AccesHTTP();

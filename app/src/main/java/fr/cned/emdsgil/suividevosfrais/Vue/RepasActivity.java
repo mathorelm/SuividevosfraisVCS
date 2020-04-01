@@ -22,6 +22,16 @@ import fr.cned.emdsgil.suividevosfrais.modele.Serializer;
 import fr.cned.emdsgil.suividevosfrais.R;
 //import android.support.v7.app.AppCompatActivity;
 
+/**
+ * \author emds
+ * \author Louis-Marin Mathorel
+ * \version 2.0
+ * \date ?????? (creation) 30/03/2020 (mise à jour)
+ * \class RepasActivity RepasActivity.java
+ * \brief Vue saisie des frais de repas
+ * <p>
+ * \details Propose l'IHM "saisie des frais de repas" à l'utilisateur
+ */
 public class RepasActivity extends AppCompatActivity {
 
     // informations affichées dans l'activité
@@ -38,7 +48,7 @@ public class RepasActivity extends AppCompatActivity {
         Global.changeAfficheDate((DatePicker) findViewById(R.id.datRepas), false);
         // valorisation des propriétés
         valoriseProprietes();
-        // chargement des méthodes événementielles
+
         imgReturn_clic();
         cmdValider_clic();
         cmdPlus_clic();
@@ -62,9 +72,10 @@ public class RepasActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-
     /**
-     * Valorisation des propriétés avec les informations affichées
+     * \brief Valorise les propriétés
+     * \details Fait correspondre aux propriétés de la classe les données
+     *          affichées dans l'IHM
      */
     private void valoriseProprietes() {
         annee = ((DatePicker) findViewById(R.id.datRepas)).getYear();
@@ -79,7 +90,8 @@ public class RepasActivity extends AppCompatActivity {
     }
 
     /**
-     * Sur la selection de l'image : retour au menu principal
+     * \brief Réaction au clic sur l'image en haut à gauche
+     * \details Retourne au menu principal
      */
     private void imgReturn_clic() {
         findViewById(R.id.imgRepasReturn).setOnClickListener(new ImageView.OnClickListener() {
@@ -90,7 +102,8 @@ public class RepasActivity extends AppCompatActivity {
     }
 
     /**
-     * Sur le clic du bouton valider : sérialisation
+     * \brief Réaction au clic sur 'Valider'
+     * \details Effectue la sérialisation puis retourne au menu principal
      */
     private void cmdValider_clic() {
         findViewById(R.id.cmdRepasValider).setOnClickListener(new Button.OnClickListener() {
@@ -100,9 +113,10 @@ public class RepasActivity extends AppCompatActivity {
             }
         }) ;
     }
-    
+
     /**
-     * Sur le clic du bouton plus : ajout de 10 dans la quantité
+     * \brief Réaction au clic sur '+'
+     * \details Ajoute 1 à la quantité et enregistre.
      */
     private void cmdPlus_clic() {
         findViewById(R.id.cmdRepasPlus).setOnClickListener(new Button.OnClickListener() {
@@ -112,9 +126,10 @@ public class RepasActivity extends AppCompatActivity {
             }
         }) ;
     }
-    
+
     /**
-     * Sur le clic du bouton moins : enlève 10 dans la quantité si c'est possible
+     * \brief Réaction au clic sur '-'
+     * \details Retire 1 (jusqu'à 0) à la quantité et enregistre.
      */
     private void cmdMoins_clic() {
         findViewById(R.id.cmdRepasMoins).setOnClickListener(new Button.OnClickListener() {
@@ -124,9 +139,10 @@ public class RepasActivity extends AppCompatActivity {
             }
         }) ;
     }
-    
+
     /**
-     * Sur le changement de date : mise à jour de l'affichage de la qte
+     * \brief Réaction au clic 'changement de date'
+     * \details Met à jour l'affichage et valorise les propriétés.
      */
     private void dat_clic() {
         final DatePicker uneDate = (DatePicker) findViewById(R.id.datRepas);
@@ -139,7 +155,8 @@ public class RepasActivity extends AppCompatActivity {
     }
 
     /**
-     * Enregistrement dans la zone de texte et dans la liste de la nouvelle qte, à la date choisie
+     * \brief Enregistrement de la quantité
+     * \details Met à jour la zone de texte et la liste de frais en mémoire, à la date choisie
      */
     private void enregNewQte() {
         // enregistrement dans la zone de texte
@@ -154,7 +171,8 @@ public class RepasActivity extends AppCompatActivity {
     }
 
     /**
-     * Retour à l'activité principale (le menu)
+     * \brief Retour à l'activité principale
+     * \details Revient à 'MainActivity'
      */
     private void retourActivityPrincipale() {
         Intent intent = new Intent(RepasActivity.this, MainActivity.class);

@@ -14,16 +14,29 @@ import java.util.Locale;
 import fr.cned.emdsgil.suividevosfrais.controleur.Global;
 import fr.cned.emdsgil.suividevosfrais.R;
 
+/**
+ * \author emds
+ * \author Mise à jour par Louis-Marin Mathorel
+ * \version 2.0
+ * \date ?????? (creation) 30/03/2020 (mise à jour)
+ * \class FraisHfAdapter FraisHfAdapter.java
+ * \brief Adapter pour les frais hors forfaits.
+ * <p>
+ * \details Permet l'affichage et la suppression des frais hors forfait
+ */
 public class FraisHfAdapter extends BaseAdapter {
 
-    private final ArrayList<FraisHf> lesFrais; // liste des frais du mois
+    // liste des frais du mois
+    private final ArrayList<FraisHf> lesFrais;
     private final LayoutInflater inflater;
     private final int key;
 
     /**
-     * Constructeur de l'adapter pour valoriser les propriétés
-     * @param context Accès au contexte de l'application
-     * @param lesFrais Liste des frais hors forfait
+     * \brief Constructeur de l'adapter
+     * \details valorise les propriétés private
+     * \param context \e Context Accès au contexte de l'application
+     * \param lesFrais \e ArrayList<FraisHF> Liste des frais hors forfait
+     * \param laCle \e integer Clé d'accès au tableau lesFrais
      */
     public FraisHfAdapter(Context context, ArrayList<FraisHf> lesFrais, int laCle) {
         inflater = LayoutInflater.from(context);
@@ -57,6 +70,13 @@ public class FraisHfAdapter extends BaseAdapter {
 
     /**
      * Affichage dans la liste
+     */
+    /**
+     * \brief Affichage dans la liste de l'Adapter
+     * \details gènère la liste ou récupère le tag cliqué
+     * \param index \e integer index de la donnée dans le tableau de frais
+     * \param convertView \e View objet récupérant la liste de l'adapter
+     * \param parent \e ViewGroup objet contenant le convertView
      */
     @Override
     public View getView(int index, View convertView, ViewGroup parent) {
@@ -107,5 +127,5 @@ public class FraisHfAdapter extends BaseAdapter {
         //Ajout du bouton supprimer
         ImageButton cmdSuppHf;
     }
-	
+
 }

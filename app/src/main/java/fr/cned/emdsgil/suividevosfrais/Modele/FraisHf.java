@@ -3,9 +3,16 @@ package fr.cned.emdsgil.suividevosfrais.modele;
 import java.io.Serializable;
 
 /**
- * Classe métier contenant la description d'un frais hors forfait
+ * \author emds
+ * \version 1.0
+ * \date ?????? (creation)
+ * \class FraisHF FraisHF.java
+ * \brief classe métier - Frais hors forfait
  *
+ * \details Contient la description d'un frais hors-forfait
+ *          avec les getters.
  */
+
 public class FraisHf implements Serializable {
 
     private final Float montant;

@@ -3,7 +3,6 @@ package fr.cned.emdsgil.suividevosfrais.vue;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
-import android.net.Network;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,7 +13,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -31,8 +29,15 @@ import fr.cned.emdsgil.suividevosfrais.modele.FraisHf;
 import fr.cned.emdsgil.suividevosfrais.controleur.Global;
 import fr.cned.emdsgil.suividevosfrais.R;
 
-//import android.support.v7.app.AppCompatActivity;
-
+/**
+ * \author Louis-Marin Mathorel
+ * \version 1.0
+ * \date 30/03/2020
+ * \class TransfertActivity TransfertActivity.java
+ * \brief Vue transfert des données
+ * <p>
+ * \details Propose l'IHM "transfert des données " à l'utilisateur
+ */
 /**
  * Activity d'authentification pour transfert des données
  * vers BDD distante.
@@ -40,19 +45,26 @@ import fr.cned.emdsgil.suividevosfrais.R;
 public class TransfertActivity extends AppCompatActivity {
 
     public static String serveurMessage = "";
-    // informations affichées dans l'activité
-    private Integer annee;
-    private Integer mois;
-    private Integer etapes;
-    List lesDonneesAEnvoyer = new ArrayList();
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_transfert);
-        setTitle("GSB : Transférer les données locales");
-        //Activation du bouton Valider
-        cmdValider_clic();
+    /**
+     * \brief Vérification de la connection à Internet
+     * \details après autorisation de l'utilisateur, vérifie si le terminal
+     *          est sous couverture GSM ou WIFI
+     * \param context \e Context Accès au contexte de l'application
+     * \return \e Boolean True si connecté.
+     */
+    public static boolean isConnectingToInternet(Context context) {
+        ConnectivityManager cm =
+                (ConnectivityManager) context.getSystemService(
+                        Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        if (activeNetwork != null) {
+            if ((activeNetwork.getType() == ConnectivityManager.TYPE_WIFI) ||
+                    (activeNetwork.getType() == ConnectivityManager.TYPE_MOBILE)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
@@ -70,27 +82,27 @@ public class TransfertActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-    /**
-     * Vérifie si une connection à Internet est disponible pour transférer
-     * les données
-     * @param context Contexte appelant
-     * @return true si connection Internet disponible, false sinon
-     */
-    public static boolean isConnectingToInternet(Context context) {
-        ConnectivityManager cm =
-                (ConnectivityManager) context.getSystemService(
-                        Context.CONNECTIVITY_SERVICE);
-        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
-        if (activeNetwork != null) {
-            if ((activeNetwork.getType() == ConnectivityManager.TYPE_WIFI) ||
-                    (activeNetwork.getType() == ConnectivityManager.TYPE_MOBILE)) {
-                return true;
-            }
-        }
-        return false;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_transfert);
+        setTitle("GSB : Transférer les données locales");
+
+        cmdValider_clic();
     }
 
-    public void prepareFrais() {
+    /**
+     * \brief Valorise le tableau privé \e lesDonneesAEnvoyer
+     * \details pour préparer l'envoi en chaîne JSON, parcours l'intégralité
+     * du tableau \e listFraisMois et rentre les données les unes après les autres
+     * en intercalant 'FF' dès qu'il trouve un frais forfaitisé, 'HF' pour un hors-forfait
+     * \param login \e String login pour l'accès à la base de données
+     * \param mdp \e String mot de passe transmis en clair
+     * \return \e JSONArray Données mise en forme JSON
+     */
+    public JSONArray prepareFrais(String login, String mdp) {
+        List lesDonneesAEnvoyer = new ArrayList();
         //Remplir la liste avec les éléments extraits de la HashTable
         Set keys = Global.listFraisMois.keySet();
         Iterator itr = keys.iterator();
@@ -113,10 +125,12 @@ public class TransfertActivity extends AppCompatActivity {
                 lesDonneesAEnvoyer.add(listeHF.get(cpt).getMontant());
             }
         }
+        return new JSONArray(lesDonneesAEnvoyer);
     }
 
     /**
-     * Sur la selection de l'image : retour au menu principal
+     * \brief Réaction au clic sur l'image en haut à gauche
+     * \details Retourne au menu principal
      */
     private void imgReturn_clic() {
         findViewById(R.id.imgTransfertReturn).setOnClickListener(new ImageView.OnClickListener() {
@@ -127,27 +141,29 @@ public class TransfertActivity extends AppCompatActivity {
     }
 
     /**
-     * Sur le clic du bouton valider : transmission distante
+     * \brief Réaction au clic sur 'Valider'
+     * \details Effectue la conversion du tableau en JSON
+     *          vérifie la capacité à envoyer la donnée
+     *          transfère la donnée en utilisant \e AccesDistant
+     *          retourne à l'activité principale
      */
     private void cmdValider_clic() {
         findViewById(R.id.cmdAuthentValider).setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
-                findViewById(R.id.cmdAuthentValider).setEnabled(Boolean.FALSE);
-                String login = ((EditText) findViewById(R.id.txtTransfertLogin)).getText().toString();
-                String mdp = ((EditText) findViewById(R.id.txtTransfertMdp)).getText().toString();
-                lesDonneesAEnvoyer.clear();
-                lesDonneesAEnvoyer.add(login);
-                lesDonneesAEnvoyer.add(mdp);
-                prepareFrais();
                 if (isConnectingToInternet(TransfertActivity.this)) {
-
-                    JSONArray lesDonnees = new JSONArray(lesDonneesAEnvoyer);
+                    String login = ((EditText) findViewById(R.id.txtTransfertLogin)).getText().toString();
+                    String mdp = ((EditText) findViewById(R.id.txtTransfertMdp)).getText().toString();
+                    JSONArray lesDonnees = prepareFrais(login, mdp);
                     AccesDistant monAcces = new AccesDistant();
                     monAcces.envoi("check", lesDonnees);
+
+                    //Affichage du message d'attente et du gif animé
+                    findViewById(R.id.cmdAuthentValider).setEnabled(Boolean.FALSE);
                     findViewById(R.id.transfertText).setVisibility(View.VISIBLE);
                     findViewById(R.id.transfertAttente).setVisibility(View.VISIBLE);
-                    Log.d("envoi", lesDonneesAEnvoyer.toString());
                     serveurMessage = "";
+                    //TODO comment gérer la fin de l'attente et donc la suppression du message / GIF animé ?
+
                     retourActivityPrincipale();
                 } else {
                     Toast.makeText(getApplicationContext(), "Aucune connection disponible. Veuillez réessayer ultérieurement.", Toast.LENGTH_LONG).show();

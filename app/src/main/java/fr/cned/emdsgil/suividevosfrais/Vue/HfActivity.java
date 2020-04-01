@@ -2,8 +2,6 @@ package fr.cned.emdsgil.suividevosfrais.vue;
 
 import android.os.Bundle;
 import android.content.Intent;
-//import android.support.v7.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -13,11 +11,23 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import fr.cned.emdsgil.suividevosfrais.modele.FraisMois;
 import fr.cned.emdsgil.suividevosfrais.controleur.Global;
 import fr.cned.emdsgil.suividevosfrais.modele.Serializer;
 import fr.cned.emdsgil.suividevosfrais.R;
 
+/**
+ * \author emds
+ * \author Louis-Marin Mathorel
+ * \version 2.0
+ * \date ?????? (creation) 30/03/2020 (mise à jour)
+ * \class HfActivity HfActivity.java
+ * \brief Vue saisie des frais hors forfait
+ * <p>
+ * \details Propose l'IHM "saisie des frais hors forfait" à l'utilisateur
+ */
 public class HfActivity extends AppCompatActivity {
 
     @Override
@@ -29,7 +39,6 @@ public class HfActivity extends AppCompatActivity {
         Global.changeAfficheDate((DatePicker) findViewById(R.id.datHf), true);
         // mise à 0 du montant
         ((EditText) findViewById(R.id.txtHf)).setText("0");
-        // chargement des méthodes événementielles
         imgReturn_clic();
         cmdAjouter_clic();
     }
@@ -51,7 +60,8 @@ public class HfActivity extends AppCompatActivity {
     }
 
     /**
-     * Sur la selection de l'image : retour au menu principal
+     * \brief Réaction au clic sur l'image en haut à gauche
+     * \details Retourne au menu principal
      */
     private void imgReturn_clic() {
         findViewById(R.id.imgHfReturn).setOnClickListener(new ImageView.OnClickListener() {
@@ -62,7 +72,8 @@ public class HfActivity extends AppCompatActivity {
     }
 
     /**
-     * Sur le clic du bouton ajouter : enregistrement dans la liste et sérialisation
+     * \brief Réaction au clic sur 'Ajouter'
+     * \details Effectue l'enregistrement en liste, la sérialisation puis retourne au menu principal
      */
     private void cmdAjouter_clic() {
         findViewById(R.id.cmdHfAjouter).setOnClickListener(new Button.OnClickListener() {
@@ -75,7 +86,8 @@ public class HfActivity extends AppCompatActivity {
     }
 
     /**
-     * Enregistrement dans la liste du nouveau frais hors forfait
+     * \brief Enregistrement des données de l'IHM dans la liste
+     * \details corrige la donnée si déjà existante, sinon la crée.
      */
     private void enregListe() {
         // récupération des informations saisies
@@ -94,7 +106,8 @@ public class HfActivity extends AppCompatActivity {
     }
 
     /**
-     * Retour à l'activité principale (le menu)
+     * \brief Retour à l'activité principale
+     * \details Revient à 'MainActivity'
      */
     private void retourActivityPrincipale() {
         Intent intent = new Intent(HfActivity.this, MainActivity.class);

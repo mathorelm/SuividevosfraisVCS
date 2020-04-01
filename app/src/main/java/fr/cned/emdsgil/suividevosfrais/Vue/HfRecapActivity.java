@@ -20,6 +20,17 @@ import fr.cned.emdsgil.suividevosfrais.modele.FraisHfAdapter;
 import fr.cned.emdsgil.suividevosfrais.controleur.Global;
 import fr.cned.emdsgil.suividevosfrais.R;
 
+/**
+ * \author emds
+ * \author Louis-Marin Mathorel
+ * \version 2.0
+ * \date ?????? (creation) 30/03/2020 (mise à jour)
+ * \class HfRecapActivity HfRecapActivity.java
+ * \brief Vue récapitulative des frais hors forfait
+ * <p>
+ * \details Affiche le récapitulatif des frais hors forfait en
+ * utilisant FraisHfAdapter
+ */
 public class HfRecapActivity extends AppCompatActivity {
 
     @Override
@@ -31,7 +42,6 @@ public class HfRecapActivity extends AppCompatActivity {
         Global.changeAfficheDate((DatePicker) findViewById(R.id.datHfRecap), false);
         // valorisation des propriétés
         afficheListe();
-        // chargement des méthodes événementielles
         imgReturn_clic();
         dat_clic();
     }
@@ -53,7 +63,8 @@ public class HfRecapActivity extends AppCompatActivity {
     }
 
     /**
-     * Affiche la liste des frais hors forfaits de la date sélectionnée
+     * \brief Affiche la liste des frais hors forfait
+     * \details Recherche dans listFraisMois la date sélectionnée et affiche la donnée
      */
     private void afficheListe() {
         Integer annee = ((DatePicker) findViewById(R.id.datHfRecap)).getYear();
@@ -65,11 +76,6 @@ public class HfRecapActivity extends AppCompatActivity {
             liste = Global.listFraisMois.get(key).getLesFraisHf();
         } else {
             liste = new ArrayList<>();
-            /* Retrait du type de l'ArrayList (Optimisation Android Studio)
-             * Original : Typage explicit =
-             * liste = new ArrayList<FraisHf>() ;
-             */
-            // insertion dans la listview
         }
         ListView listView = (ListView) findViewById(R.id.lstHfRecap);
         FraisHfAdapter adapter = new FraisHfAdapter(HfRecapActivity.this, liste, key);
@@ -77,18 +83,20 @@ public class HfRecapActivity extends AppCompatActivity {
     }
 
     /**
-     * Sur la selection de l'image : retour au menu principal
+     * \brief Réaction au clic sur l'image en haut à gauche
+     * \details Retourne au menu principal
      */
     private void imgReturn_clic() {
         findViewById(R.id.imgHfRecapReturn).setOnClickListener(new ImageView.OnClickListener() {
             public void onClick(View v) {
                 retourActivityPrincipale();
             }
-    	}) ;
+        });
     }
 
     /**
-     * Sur le changement de date : mise à jour de l'affichage de la qte
+     * \brief Réaction au clic 'changement de date'
+     * \details Met à jour l'affichage et valorise les propriétés.
      */
     private void dat_clic() {
         final DatePicker uneDate = (DatePicker) findViewById(R.id.datHfRecap);
@@ -97,15 +105,15 @@ public class HfRecapActivity extends AppCompatActivity {
             public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                 afficheListe();
             }
-    	});
+        });
     }
 
-
     /**
-     * Retour à l'activité principale (le menu)
+     * \brief Retour à l'activité principale
+     * \details Revient à 'MainActivity'
      */
     private void retourActivityPrincipale() {
         Intent intent = new Intent(HfRecapActivity.this, MainActivity.class);
         startActivity(intent);
-	}
+    }
 }

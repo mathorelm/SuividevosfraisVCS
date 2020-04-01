@@ -11,7 +11,13 @@ import java.net.URLEncoder;
 import android.os.AsyncTask;
 
 /**
- * Classe technique de connexion distante HTTP
+ * \author emds
+ * \version 1.0
+ * \date ?????? (creation)
+ * \class AccesHTTP AccesHTTP.java
+ * \brief classe technique de connection distante HTTP
+ *
+ * \details fournit les services pour AccesDistant
  */
 public class AccesHTTP extends AsyncTask<String, Integer, Long> {
 
@@ -21,17 +27,17 @@ public class AccesHTTP extends AsyncTask<String, Integer, Long> {
     private String parametres = ""; // paramètres à envoyer en POST au serveur
 
     /**
-     * Constructeur : ne fait rien
+     * \brief Constructeur
      */
     public AccesHTTP() {
         super();
     }
 
     /**
-     * Construction de la chaîne de paramètres à envoyer en POST au serveur
-     *
-     * @param nom chaîne représentant le nom du paramètre à renseigner
-     * @param valeur chaîne contenant la valeur à associer au paramètre passé
+     * \brief Construction de la chaîne paramètre POST (encodage UTF-8)
+     * \details ajoute à chaque appel un paramètre déterminé par nom = valeur
+     * \param nom \e String chaîne représentative du paramètre à renseigner
+     * \param valeur \e String chaîne contenant la valeur à associer
      */
     public void addParam(String nom, String valeur) {
         try {
@@ -48,11 +54,9 @@ public class AccesHTTP extends AsyncTask<String, Integer, Long> {
     }
 
     /**
-     * Méthode appelée par la méthode execute
-     * permet d'envoyer au serveur une liste de paramètres en GET
-     *
-     * @param urls contient l'adresse du serveur dans la case 0 de urls
-     * @return null
+     * \brief méthode appelée depuis \e execute
+     * \details envoie au serveur une liste de paramètres en POST
+     * \param urls \e String... contient l'adresse du serveur dans la case 0
      */
     @Override
     protected Long doInBackground(String... urls) {
@@ -63,7 +67,6 @@ public class AccesHTTP extends AsyncTask<String, Integer, Long> {
         PrintWriter writer = null;
         BufferedReader reader = null;
         HttpURLConnection connexion = null;
-
         try {
             // création de l'url à partir de l'adresse reçu en paramètre, dans urls[0]
             URL url = new URL(urls[0]);
@@ -99,14 +102,16 @@ public class AccesHTTP extends AsyncTask<String, Integer, Long> {
     }
 
     /**
-     * Sur le retour du serveur, envoi l'information retournée à processFinish
-     *
-     * @param result élément transmis vers processFinish avec conversion en String.
+     * \brief Transmission de la donnée retour
+     * \details Renvoie le résultat du serveur à \e processFinish via la variable \e ret
+     *          et l'objet \e delegate
+     * \param result \e Long code résultat
+     * \param context \e Context contexte appelant la sérialisation (obligatoire)
      */
     @Override
     protected void onPostExecute(Long result) {
         // ret contient l'information récupérée
-        delegate.processFinish(this.ret.toString());
+        delegate.processFinish(this.ret);
     }
 
 }

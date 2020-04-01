@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 //import android.support.v7.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
@@ -17,6 +19,16 @@ import fr.cned.emdsgil.suividevosfrais.controleur.Global;
 import fr.cned.emdsgil.suividevosfrais.modele.Serializer;
 import fr.cned.emdsgil.suividevosfrais.R;
 
+/**
+ * \author emds
+ * \author Louis-Marin Mathorel
+ * \version 2.0
+ * \date ?????? (creation) 30/03/2020 (mise à jour)
+ * \class MainActivity MainActivity.java
+ * \brief Vue principale de l'application
+ * <p>
+ * \details Propose le menu principal de l'application
+ */
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -26,14 +38,13 @@ public class MainActivity extends AppCompatActivity {
         setTitle("GSB : Suivi des frais");
         // récupération des informations sérialisées
         recupSerialize();
-        // chargement des méthodes événementielles
+
         cmdMenu_clic(((ImageButton) findViewById(R.id.cmdKm)), KmActivity.class);
         cmdMenu_clic(((ImageButton) findViewById(R.id.cmdHf)), HfActivity.class);
         cmdMenu_clic(((ImageButton) findViewById(R.id.cmdNuitee)), NuiteeActivity.class);
         cmdMenu_clic(((ImageButton) findViewById(R.id.cmdHfRecap)), HfRecapActivity.class);
         cmdMenu_clic(((ImageButton) findViewById(R.id.cmdEtape)), EtapeActivity.class);
         cmdMenu_clic(((ImageButton) findViewById(R.id.cmdRepas)), RepasActivity.class);
-        //cmdMenu_clic(((ImageButton) findViewById(R.id.cmdTransfert)), TransfertActivity.class);
         cmdTransfert_clic();
     }
 
@@ -46,15 +57,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * Récupère la sérialisation si elle existe
+     * \brief Récupère les données sérialisées si elles existent
+     * \details Tente la récupération avec \e Serializer, remplit le tableau
+     *          ou sinon crée un tableau vide.
      */
     private void recupSerialize() {
-        /* Pour éviter le warning "Unchecked cast from Object to Hash" produit par un casting direct :
-         * Global.listFraisMois = (Hashtable<Integer, FraisMois>) Serializer.deSerialize(Global.filename, MainActivity.this);
-         * On créé un Hashtable générique <?,?> dans lequel on récupère l'Object retourné par la méthode deSerialize, puis
-         * on cast chaque valeur dans le type attendu.
-         * Seulement ensuite on affecte cet Hastable à Global.listFraisMois.
-         */
         Hashtable<?, ?> monHash = (Hashtable<?, ?>) Serializer.deSerialize(MainActivity.this);
         if (monHash != null) {
             Hashtable<Integer, FraisMois> monHashCast = new Hashtable<>();
@@ -63,19 +70,15 @@ public class MainActivity extends AppCompatActivity {
             }
             Global.listFraisMois = monHashCast;
         }
-        // si rien n'a été récupéré, il faut créer la liste
+        //si rien n'a été récupéré, il faut créer la liste
         if (Global.listFraisMois == null) {
             Global.listFraisMois = new Hashtable<>();
-            /* Retrait du type de l'HashTable (Optimisation Android Studio)
-             * Original : Typage explicit =
-             * Global.listFraisMois = new Hashtable<Integer, FraisMois>();
-             */
-
         }
     }
 
     /**
-     * Sur la sélection d'un bouton dans l'activité principale ouverture de l'activité correspondante
+     * \brief Réaction au clic sur une icône du menu
+     * \details Ouvre l'activité adaptée au bouton cliqué.
      */
     private void cmdMenu_clic(ImageButton button, final Class classe) {
         button.setOnClickListener(new Button.OnClickListener() {
@@ -88,13 +91,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * Cas particulier du bouton pour le transfert d'informations vers le serveur
+     * \brief Réaction au clic sur le bouton 'Transfert'
+     * \details Charge \e TransfertActivity spécialisée dans la communication vers serveur distant
      */
     private void cmdTransfert_clic() {
         findViewById(R.id.cmdTransfert).setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
-                // envoi les informations sérialisées vers le serveur
-                // en construction
                 Intent intent = new Intent(MainActivity.this, TransfertActivity.class);
                 startActivity(intent);
             }

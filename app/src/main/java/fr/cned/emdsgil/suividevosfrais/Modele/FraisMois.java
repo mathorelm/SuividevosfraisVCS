@@ -3,20 +3,32 @@ package fr.cned.emdsgil.suividevosfrais.modele;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import fr.cned.emdsgil.suividevosfrais.modele.FraisHf;
-
 /**
- * Classe métier contenant les informations des frais d'un mois
+ * \author emds
+ * \version 1.0
+ * \date ?????? (creation)
+ * \class FraisMois FraisMois.java
+ * \brief classe métier - Frais forfaitisés du mois
+ *
+ * \details Contient la description des frais forfaitisés.
+ *          avec les getters et méthodes métiers (ajout/suppression).
  */
 public class FraisMois implements Serializable {
 
-    private Integer mois; // mois concerné
-    private Integer annee; // année concernée
-    private Integer etape; // nombre d'étapes du mois
-    private Integer km; // nombre de km du mois
-    private Integer nuitee; // nombre de nuitées du mois
-    private Integer repas; // nombre de repas du mois
-    private final ArrayList<FraisHf> lesFraisHf; // liste des frais hors forfait du mois
+    //liste des frais hors forfait du mois
+    private final ArrayList<FraisHf> lesFraisHf;
+    //mois concerné
+    private Integer mois;
+    //année concernée
+    private Integer annee;
+    // nombre d'étapes du mois
+    private Integer etape;
+    //nombre de km du mois
+    private Integer km;
+    //nombre de nuitées du mois
+    private Integer nuitee;
+    //nombre de repas du mois
+    private Integer repas;
 
     public FraisMois(Integer annee, Integer mois) {
         this.annee = annee;
@@ -26,38 +38,48 @@ public class FraisMois implements Serializable {
         this.nuitee = 0;
         this.repas = 0;
         lesFraisHf = new ArrayList<>();
-        /* Retrait du type de l'ArrayList (Optimisation Android Studio)
-         * Original : Typage explicit =
-         * lesFraisHf = new ArrayList<FraisHf>() ;
-         */
     }
 
     /**
-     * Ajout d'un frais hors forfait
-     *
-     * @param montant Montant en euros du frais hors forfait
-     * @param motif Justification du frais hors forfait
+     * \brief Ajout d'un frais hors forfait
+     * \details Valorise le tableau privé lesFraisHf
+     * \param montant \e Float Montant en euros du frais hors forfait
+     * \param motif \e Justification du frais
      */
     public void addFraisHf(Float montant, String motif, Integer jour) {
         lesFraisHf.add(new FraisHf(montant, motif, jour));
     }
 
+    /**
+     * \brief Récupère le montant du frais Hors forfait
+     * \param indice \e Integer indice du tableau des frais
+     * \return \e Float un montant en euros
+     */
     public float getLeFraisHFMontant(int indice) {
         return lesFraisHf.get(indice).getMontant();
     }
 
+    /**
+     * \brief Récupère le motif du frais Hors forfait
+     * \param indice \e Integer indice du tableau des frais
+     * \return \e String une justification
+     */
     public String getleFraisHFMotif(int indice) {
         return lesFraisHf.get(indice).getMotif();
     }
 
+    /**
+     * \brief Récupère le jour du frais Hors forfait
+     * \param indice \e Integer indice du tableau des frais
+     * \return \e Integer le jour du mois concerné par le frais
+     */
     public int getLeFraisHFJour(int indice) {
         return lesFraisHf.get(indice).getJour();
     }
 
     /**
-     * Suppression d'un frais hors forfait
-     *
-     * @param index Indice du frais hors forfait à supprimer
+     * \brief Suppression d'un frais hors forfait
+     * \param index Indice du frais hors forfait à supprimer
      */
     public void supprFraisHf(int index) {
         lesFraisHf.remove(index);

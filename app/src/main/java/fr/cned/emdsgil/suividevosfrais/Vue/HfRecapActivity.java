@@ -77,7 +77,7 @@ public class HfRecapActivity extends AppCompatActivity {
         } else {
             liste = new ArrayList<>();
         }
-        ListView listView = (ListView) findViewById(R.id.lstHfRecap);
+        ListView listView = findViewById(R.id.lstHfRecap);
         FraisHfAdapter adapter = new FraisHfAdapter(HfRecapActivity.this, liste, key);
         listView.setAdapter(adapter);
     }
@@ -99,7 +99,7 @@ public class HfRecapActivity extends AppCompatActivity {
      * \details Met à jour l'affichage et valorise les propriétés.
      */
     private void dat_clic() {
-        final DatePicker uneDate = (DatePicker) findViewById(R.id.datHfRecap);
+        final DatePicker uneDate = findViewById(R.id.datHfRecap);
         uneDate.init(uneDate.getYear(), uneDate.getMonth(), uneDate.getDayOfMonth(), new OnDateChangedListener() {
             @Override
             public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {

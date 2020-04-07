@@ -59,10 +59,8 @@ public class TransfertActivity extends AppCompatActivity {
                         Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
         if (activeNetwork != null) {
-            if ((activeNetwork.getType() == ConnectivityManager.TYPE_WIFI) ||
-                    (activeNetwork.getType() == ConnectivityManager.TYPE_MOBILE)) {
-                return true;
-            }
+            return (activeNetwork.getType() == ConnectivityManager.TYPE_WIFI) ||
+                    (activeNetwork.getType() == ConnectivityManager.TYPE_MOBILE);
         }
         return false;
     }

@@ -146,7 +146,7 @@ public class NuiteeActivity extends AppCompatActivity {
      * \details Met à jour l'affichage et valorise les propriétés.
      */
     private void dat_clic() {
-        final DatePicker uneDate = (DatePicker) findViewById(R.id.datNuitee);
+        final DatePicker uneDate = findViewById(R.id.datNuitee);
         uneDate.init(uneDate.getYear(), uneDate.getMonth(), uneDate.getDayOfMonth(), new OnDateChangedListener() {
             @Override
             public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {

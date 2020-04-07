@@ -37,7 +37,7 @@ public abstract class Global {
      */
     public static void changeAfficheDate(DatePicker datePicker, boolean afficheJours) {
         try {
-            Field f[] = datePicker.getClass().getDeclaredFields();
+            Field[] f = datePicker.getClass().getDeclaredFields();
             for (Field field : f) {
                 int daySpinnerId = Resources.getSystem().getIdentifier("day", "id", "android");
                 datePicker.init(datePicker.getYear(), datePicker.getMonth(), datePicker.getDayOfMonth(), null);

@@ -1,4 +1,4 @@
-package fr.cned.emdsgil.suividevosfrais.controleur;
+package fr.cned.emdsgil.suividevosfrais.modele;
 
 import android.util.Log;
 
@@ -15,9 +15,9 @@ import fr.cned.emdsgil.suividevosfrais.vue.TransfertActivity;
  * \date 25/02/2018 (creation) 30/03/2020 (mise à jour)
  * \class AccesDistant AccesDistant.java
  * \brief permet d'accéder à la base distante
- *
+ * <p>
  * \details Met en place un envoi de données POST puis un thread
- *          d'attente de réponse du serveur HTTP.
+ * d'attente de réponse du serveur HTTP.
  */
 
 public class AccesDistant implements AsyncResponse {
@@ -35,7 +35,7 @@ public class AccesDistant implements AsyncResponse {
     /**
      * \brief Retour du serveur HTTP
      * \details cette fonction est déclenchée par le thread
-     *          lorsqu'une donnée entrante arrive du serveur
+     * lorsqu'une donnée entrante arrive du serveur
      * \param output    \e String contenant les données
      */
     @Override
@@ -65,7 +65,7 @@ public class AccesDistant implements AsyncResponse {
     /**
      * \brief Envoi de données vers le serveur distant
      * \details cette fonction envoi des données en POST vers le serveur
-     *          avec les paramètres fournis
+     * avec les paramètres fournis
      * \param operation    \e String information précisant au serveur l'opération à exécuter
      * \param lesDonneesJSON \e String les données à traiter par le serveur.
      */
